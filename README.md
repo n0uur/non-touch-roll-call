@@ -8,7 +8,7 @@
  - Python 3.7
  - NodeJS
 	 - VueJS
-	 - Websocket.io
+	 - WebSocket
  - NFC
 	 - Web NFC API
 
