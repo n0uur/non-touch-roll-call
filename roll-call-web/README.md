@@ -1,6 +1,6 @@
-# non-touch-roll-call
+# roll-call-ui
 
-> non-touch Roll-Call | KMITL PSIT2019 Project
+> non-touch Roll Call Project using VueJS
 
 ## Build Setup
 
