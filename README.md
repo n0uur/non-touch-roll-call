@@ -6,6 +6,7 @@
 
 ### เครื่องมือที่จะใช้ในการทำ
  - Python 3.7
+ 	 - nfcpy
  - NodeJS
 	 - VueJS
 	 - WebSocket
