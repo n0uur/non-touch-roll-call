@@ -31,7 +31,7 @@
 | 62070016 | นายกิตติภัค พนารินทร์ | [hikariz01](https://github.com/hikariz01) |
 | 62070026 | นายจักรกฤษณ์ สายแฉ่ง | [boatlittlebear](https://github.com/boatlittlebear) |
 | 62070091 | นายธัชวุฒิ วิจิตรบรรจง | [FuMiRiO](https://github.com/FuMiRiO) |
-| 62070117 | นายปวเรศ นุตาคม | *NULL* |
+| 62070117 | นายปวเรศ นุตาคม | [MeKing999](https://github.com/MeKing999) |
 
 
  
