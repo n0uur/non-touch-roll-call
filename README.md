@@ -15,6 +15,7 @@
 
 ### อ้างอิง
  - [WEB NFC API](https://www.w3.org/TR/nfc/)
+ - [Socket.io](https://socket.io/)
  - [Websocket with VueJS](https://www.npmjs.com/package/vue-native-websocket)
  - [Python 3.7](https://docs.python.org/3.7/)
 
