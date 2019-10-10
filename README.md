@@ -18,6 +18,7 @@
  - [Socket.io](https://socket.io/)
  - [Websocket with VueJS](https://www.npmjs.com/package/vue-native-websocket)
  - [Python 3.7](https://docs.python.org/3.7/)
+ - [Bootstrap](https://bootstrap-vue.js.org/)
 
 ### ประโยชน์ที่คาดว่าจะได้รับ
  - ได้ฝึกฝนทักษะและกระบวนการทำงานเป็นกลุ่ม
