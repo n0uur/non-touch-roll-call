@@ -1,0 +1,19 @@
+{
+  "name": "roll-call-web-api",
+  "version": "1.0.0",
+  "description": "non-touch Roll-Call Web's API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "non-touch-roll-call"
+  },
+  "author": "IT@KMITL",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
