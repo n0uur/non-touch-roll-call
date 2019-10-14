@@ -15,7 +15,7 @@ export default new Router({
     {
       path: '*',
       name: '404 Page Not Found',
-      // component: () => import('./pathToComponent'),
+      component: () => import('@/components/404'),
       meta: {
         title: '404 Page Not Found',
         requiredAuth: false
