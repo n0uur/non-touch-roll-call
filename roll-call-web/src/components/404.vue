@@ -7,7 +7,7 @@
     <br>
     <h2>ไม่พบหน้าที่คุณร้องขอ</h2>
     <p>หากคิดว่านี่คือข้อผิดพลาด กรุณาติดต่อผู้ดูแลระบบ</p>
-    <button class="btn btn-info" @click="$router.push('/')">กลับสู่หน้าหลัก</button>
+    <button class="btn btn-warning" @click="$router.push('/')">กลับสู่หน้าหลัก</button>
   </div>
 </template>
 
@@ -21,7 +21,7 @@
 .notfound {
   font-size: 120px;
   margin: auto;
-  background-image: url('./assets/fried-egg.png');
+  background-image: url('../assets/fried-egg.png');
   background-size: cover;
   width: 320px;
   height: 320px;
