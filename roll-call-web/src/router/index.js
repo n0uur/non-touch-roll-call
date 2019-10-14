@@ -11,8 +11,13 @@ const router = new Router({
     {
       path: '/login',
       name: 'Login',
-      mode: 'history'
-      // component: () => import('@/components/HelloWorld')
+      mode: 'history',
+      component: () => import('@/components/Login'),
+      meta: {
+        title: 'เข้าสู่ระบบ',
+        requiredAuth: false,
+        PreventAuth: true
+      }
     },
     {
       path: '*',
@@ -20,7 +25,8 @@ const router = new Router({
       component: () => import('@/components/404'),
       meta: {
         title: 'ERROR 404',
-        requiredAuth: false
+        requiredAuth: false,
+        PreventAuth: false
       }
     }
   ]
