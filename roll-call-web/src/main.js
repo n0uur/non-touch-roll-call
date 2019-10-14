@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import './assets/css/bootstrap/bootstrap.css'
+import './assets/css/bootstrap-vue/bootstrap-vue.css'
+
+import './assets/css/nprogress.css'
 
 // import './custom.scss'
 
