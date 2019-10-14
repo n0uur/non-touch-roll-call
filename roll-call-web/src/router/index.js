@@ -6,6 +6,7 @@ import NProgress from 'nprogress'
 Vue.use(Router)
 
 const router = new Router({
+  base: '',
   routes: [
     {
       path: '/login',
@@ -15,10 +16,10 @@ const router = new Router({
     },
     {
       path: '*',
-      name: '404 Page Not Found',
+      name: 'Page Not Found',
       component: () => import('@/components/404'),
       meta: {
-        title: '404 Page Not Found',
+        title: 'ERROR 404',
         requiredAuth: false
       }
     }
@@ -32,7 +33,13 @@ router.beforeResolve((to, from, next) => {
   next()
 })
 
+const DEFAULT_TITLE = 'APP | IT ROLL-CALL';
 router.afterEach((to, from) => {
+  if (to.meta.title) {
+    document.title = to.meta.title + ' | IT ROLL-CALL'
+  } else {
+    document.title = DEFAULT_TITLE    
+  }
   NProgress.done()
 })
 
