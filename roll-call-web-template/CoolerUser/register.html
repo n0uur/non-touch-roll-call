@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <!-- Required meta tags-->
@@ -10,13 +10,10 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Register</title>
+    <title>ลงทะเบียนผู้ใช้งาน</title>
 
     <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet" media="all" type="text/css">
 
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
@@ -34,51 +31,50 @@
     <link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
-
 <body class="animsition">
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="font-family: 'Kanit', sans-serif;">
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="images/icon/logo.png" alt="CoolAdmin">
+                                <img src="images/icon/logo.png" alt="CoolerUser">
                             </a>
                         </div>
                         <div class="login-form">
                             <form action="" method="post">
                                 <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
+                                    <label>ชื่อผู้ใช้งาน</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="ชื่อผู้ใช้งาน">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <label>รหัสผ่าน</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="รหัสผ่าน">
                                 </div>
                                 <div class="form-group">
-                                    <label>Confirm Password</label>
-                                    <input class="au-input au-input--full" type="password" name="conpass" placeholder="Re-Enter Password">
+                                    <label>ยืนยันรหัสผ่าน</label>
+                                    <input class="au-input au-input--full" type="password" name="conpass" placeholder="ยืนยันรหัสผ่าน">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <input type="checkbox" name="aggree">Agree the terms and policy
+                                        <input type="checkbox" name="aggree">ยอมรับข้อกำหนดและเงื่อนไขการใช้งาน
                                     </label>
                                 </div>
-                                <button type="button" class="au-btn au-btn--block au-btn--green m-b-20" data-toggle="modal" data-target="#exampleModal">Register</button>
+                                <button type="button" class="au-btn au-btn--block au-btn--green m-b-20" data-toggle="modal" data-target="#exampleModal">ลงทะเบียน</button>
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">Confirm Register</h4>
+                                        <h4 class="modal-title" id="exampleModalLabel">ยืนยันการลงทะเบียน</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
-                                      <div class="modal-body">Are You Sure?</div>
+                                      <div class="modal-body">คุณแน่ใจแล้วใช่ไหม?</div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <a href="register.html"><button type="button" class="btn btn-primary">Confirm</button></a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                                        <a href="register.html"><button type="button" class="btn btn-primary">ยืนยัน</button></a>
                                       </div>
                                     </div>
                                   </div>
@@ -86,8 +82,8 @@
                             </form>
                             <div class="register-link">
                                 <p>
-                                    Already have account?
-                                    <a href="#">Sign In</a>
+                                    มีบัญชีผู้ใช้งานอยู่แล้ว ?
+                                    <a href="#">ลงชื่อเข้าใช้งาน</a>
                                 </p>
                             </div>
                         </div>
@@ -121,7 +117,6 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-
 </body>
 
 </html>
