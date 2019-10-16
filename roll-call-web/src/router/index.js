@@ -12,7 +12,7 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       mode: 'history',
-      component: () => import('@/components/Login'),
+      // component: () => import('@/components/Login'),
       meta: {
         title: 'เข้าสู่ระบบ',
         requiredAuth: false,
