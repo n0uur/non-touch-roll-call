@@ -92,6 +92,7 @@ p {
 }
 
 .btn {
+    line-height: 36px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
