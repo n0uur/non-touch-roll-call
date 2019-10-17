@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
@@ -31,6 +30,63 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 
+    <!-- Password Strength Checker theme -->
+    <style>
+            /* Style all input fields */
+            input {
+              width: auto;
+              padding: auto;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              box-sizing: border-box;
+              margin-top: 0px;
+              margin-bottom: 0px;
+            }
+
+            /* Style the container for inputs */
+            .container {
+              background-color: #ffffff00;
+              padding: auto;
+            }
+            
+            /* The message box is shown when the user clicks on the password field */
+            #message {
+              display:none;
+              background: #ffffff00;
+              color: #000;
+              position: relative;
+              padding: 0px 10px;
+              margin-top: 0px;
+            }
+            
+            #message p {
+              padding: auto;
+              font-size: 18px;
+            }
+            
+            /* Add a green text color and a checkmark when the requirements are right */
+            .valid {
+              color: green;
+            }
+            
+            .valid:before {
+              position: relative;
+              left: auto;
+              content: "✔   ";
+            }
+            
+            /* Add a red text color and an "x" when the requirements are wrong */
+            .invalid {
+              color: red;
+            }
+            
+            .invalid:before {
+              position: relative;
+              left: auto;
+              content: "✖   ";
+            }
+            </style>
+
 </head>
 <body class="animsition">
     <div class="page-wrapper" style="font-family: 'Kanit', sans-serif;">
@@ -51,34 +107,47 @@
                                 </div>
                                 <div class="form-group">
                                     <label>รหัสผ่าน</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="รหัสผ่าน">
+                                    <input type="password" id="psw" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="au-input au-input--full" placeholder="รหัสผ่าน">
+                                </div>
+                                <!-- Message Show Password Require -->
+                                <div id="message">
+                                    <h3>รหัสผ่านต้องเป็นไปตามข้อกำหนดนี้:</h3>
+                                    <p id="letter" class="invalid">ตัวอักษร <b>ตัวเล็ก</b> อย่างน้อย1ตัว</p>
+                                    <p id="capital" class="invalid">ตัวอักษร <b>ตัวใหญ่</b> อย่างน้อย1ตัว</p>
+                                    <p id="number" class="invalid">ตัวเลข <b>อย่างน้อย1ตัว</b></p>
+                                    <p id="length" class="invalid">รหัสผ่านต้องมีความยาวอย่างน้อย <b>8 ตัว</b></p>
                                 </div>
                                 <div class="form-group">
                                     <label>ยืนยันรหัสผ่าน</label>
-                                    <input class="au-input au-input--full" type="password" name="conpass" placeholder="ยืนยันรหัสผ่าน">
+                                    <input class="au-input au-input--full" type="password" id="conpsw" name="conpass" placeholder="ยืนยันรหัสผ่าน">
+                                    <div id="matchpass"></div>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="aggree">ยอมรับข้อกำหนดและเงื่อนไขการใช้งาน
                                     </label>
                                 </div>
-                                <button type="submit" class="au-btn au-btn--block au-btn--blue m-b-20" data-toggle="modal" data-target="#ConfirmRegis">ลงทะเบียน</button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="au-btn au-btn--block au-btn--blue m-b-20" data-toggle="modal" data-target="#ConfirmRegis">ลงทะเบียน</button>
+                                <!-- Modal -->
                                 <div class="modal fade" id="ConfirmRegis" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h4 class="modal-title" id="exampleModalLabel">ยืนยันการลงทะเบียน</h4>
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">ยืนการลงทะเบียน</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true">&times;</span>
                                         </button>
-                                      </div>
-                                      <div class="modal-body">คุณแน่ใจแล้วใช่ไหม?</div>
-                                      <div class="modal-footer">
+                                        </div>
+                                        <div class="modal-body">
+                                        คุณแน่ใจแล้วใช่ไหม?
+                                        </div>
+                                        <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                                        <a href="login.html"><button type="button" class="btn btn-primary">ยืนยัน</button></a>
-                                      </div>
+                                        <a href="login.html" role="button" class="btn btn-primary">ยืนยัน</a>
+                                        </div>
                                     </div>
-                                  </div>
+                                    </div>
                                 </div>
                             </form>
                             <div class="register-link">
@@ -118,6 +187,78 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <!-- Script Check Strength Password -->
+    <script>
+            var myInput = document.getElementById("psw");
+            var letter = document.getElementById("letter");
+            var capital = document.getElementById("capital");
+            var number = document.getElementById("number");
+            var length = document.getElementById("length");
+            
+            // When the user clicks on the password field, show the message box
+            myInput.onfocus = function() {
+              document.getElementById("message").style.display = "block";
+            }
+            
+            // When the user clicks outside of the password field, hide the message box
+            myInput.onblur = function() {
+              document.getElementById("message").style.display = "none";
+            }
+            
+            // When the user starts to type something inside the password field
+            myInput.onkeyup = function() {
+              // Validate lowercase letters
+              var lowerCaseLetters = /[a-z]/g;
+              if(myInput.value.match(lowerCaseLetters)) {  
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+              } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+              }
+              
+              // Validate capital letters
+              var upperCaseLetters = /[A-Z]/g;
+              if(myInput.value.match(upperCaseLetters)) {  
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+              } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+              }
+            
+              // Validate numbers
+              var numbers = /[0-9]/g;
+              if(myInput.value.match(numbers)) {  
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+              } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+              }
+              
+              // Validate length
+              if(myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+              } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+              }
+            }
+    </script>
+    <!-- Check Password Match -->
+    <script>
+        $(document).ready(function(){
+            $("#conpsw").keyup(function(){
+                    if ($("#psw").val() != $("#conpsw").val()) {
+                        $("#matchpass").html("รหัสผ่านไม่ตรงกัน").css("color","red");
+                    }else{
+                        $("#matchpass").html("รหัสผ่านตรงกัน").css("color","green");
+                }
+            });
+    });
+    </script>
 </body>
 
 </html>
