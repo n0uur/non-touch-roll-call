@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
@@ -50,7 +49,27 @@
                                     <label>ชื่อผู้ใช้งาน</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="ชื่อผู้ใช้งาน">
                                 </div>
-                                <button class="au-btn--block btn btn-info m-b-20" type="submit">รีเซ็ตรหัสผ่าน</button>
+                                <!-- Button trigger modal -->
+                                <a href="#" class="au-btn--block btn btn-info m-b-20" role="button" data-toggle="modal" data-target="#ConfirmReset">รีเซ็ตรหัสผ่าน</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="ConfirmReset" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">การรีเซ็ตรหัสผ่าน</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            รีเซ็ตรหัสผ่านสำเร็จ !
+                                            </div>
+                                            <div class="modal-footer">
+                                                    <a href="login.html" role="button" class="btn btn-primary">ตกลง</a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                             </form>
                         </div>
                     </div>
