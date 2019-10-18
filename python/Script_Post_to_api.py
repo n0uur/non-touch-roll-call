@@ -9,31 +9,30 @@ def error():
     winsound.Beep(2500, 750)
 
 
-def api_shoot(data):
+def api_post(classID, data):
     """Return api_shoot Function"""
-    param = {"ID": data}
+    param = {"ClassID": classID, "CardID": data}
     res = requests.post("https://api-t2o.ktnis.me", params=param)
     if res.text == "200":
         print("Success")
         for _ in range(2):
-            winsound.Beep(2500, 250)
+            winsound.Beep(2500, 350)
     else:
         error()
 
 
 def script():
     """Script to shoot api"""
-    while True:
-        data = input()
-        allnumber = "1234567890"
-        count = 0
-        for number in data:
-            if number not in allnumber or len(data) != 10:
-                count += 1
-        if count > 0:
-            error()
-            count = 0
-        else:
-            api_shoot(data)
-            count = 0
+    classID = input()
+    if len(classID) == 5:
+        while True:
+            data = input()
+            if data.isdigit() == True and len(data) == 10:
+                api_post(classID, data)
+            else:
+                error()
+    else:
+        error()
+
+
 script()
