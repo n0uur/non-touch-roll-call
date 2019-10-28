@@ -151,7 +151,7 @@
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
 
-    <!-- Vendor JS       -->
+    <!-- Vendor JS -->
     <script src="vendor/slick/slick.min.js"></script>
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
@@ -163,10 +163,10 @@
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
 
-    <!-- Sweet Alert-->
+    <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
-    <!-- Main JS-->
+    <!-- Main JS -->
     <script src="js/main.js"></script>
 
     <!-- Script Check Strength Password -->
@@ -258,20 +258,20 @@
                 }).then((result) => {
                     if (($("#psw").val() == $("#conpsw").val()) && ($("#psw").val()||$("#usr").val()||$("#conpsw").val()) != "" 
                     && $("#letter").hasClass("valid") && $("#capital").hasClass("valid") && $("#number").hasClass("valid") && $("#length").hasClass("valid")
-                    && document.getElementById("checkbx").checked){
+                    && document.getElementById("checkbx").checked && result.value){
                     Swal.fire({
                         type: 'success',
-                        text: "การลงทะเบียนสำเร็จ",
                         title: 'สำเร็จ',
+                        text: "การลงทะเบียนสำเร็จ",
                         confirmButtonText: 'ตกลง'
                         }).then((result) => {
                                 location="login.html";
                             })}
                     else if (result.value) {
                       Swal.fire({
-                        type: 'warning',
-                        text: "การลงทะเบียนไม่สำเร็จ",
+                        type: 'error',
                         title: 'เกิดข้อผิดพลาด',
+                        text: 'การลงทะเบียนไม่สำเร็จ',
                         confirmButtonText: 'ตกลง'
                         })}
                         }
