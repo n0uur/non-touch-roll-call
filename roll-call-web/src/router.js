@@ -39,7 +39,7 @@ const router = new Router({
         {
           path: 'Register',
           name: 'Register',
-          // component: () => import('@/components/Auth/Register'),
+          component: () => import('@/components/Auth/Register'),
           meta: {
             title: 'สมัครสมาชิก',
             requiredAuth: false,
