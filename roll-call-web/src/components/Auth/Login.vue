@@ -6,8 +6,9 @@
                     <div class="login-wrap">
                         <div class="login-content">
                             <div class="login-logo">
-                                <a href="#">
-                                    <h1 alt="god">IT-RollCall</h1>
+                                <a>
+                                    <h1>IT-RollCall</h1>
+                                    <h4>เข้าสู่ระบบ</h4>
                                 </a>
                             </div>
                             <div class="login-form">
@@ -20,17 +21,17 @@
                                         <label>รหัสผ่าน</label>
                                         <input class="au-input au-input--full" type="password" name="password" placeholder="รหัสผ่าน">
                                     </div>
-                                    <div class="login-checkbox">
+                                    <!-- <div class="login-checkbox">
                                         <label>
                                             <input type="checkbox" name="remember">จดจำรหัสผ่าน
                                         </label>
                                         <label>
                                             <a href="forget-pass.html">ลืมรหัสผ่าน?</a>
                                         </label>
-                                    </div>
+                                    </div> -->
                                 </form>
-                                    <a href="#" class="btn-block btn btn-info m-b-20 btn-md" role="button">ลงชื่อเข้าใช้</a>
-                                    <a href="register.html" class="btn-block btn btn-warning m-b-20 btn-md" role="button">ลงทะเบียน</a>
+                                <button class="btn-block btn btn-info m-b-20 btn-md">ลงชื่อเข้าใช้</button>
+                                <router-link to="register" class="btn-block btn btn-warning m-b-20 btn-md" role="button">ลงทะเบียน</router-link>
                             </div>
                         </div>
                     </div>
@@ -44,7 +45,7 @@
     export default {
         data () {
             return {
-                h: ""
+                
             }
         }
     }
