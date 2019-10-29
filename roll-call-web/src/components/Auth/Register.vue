@@ -5,8 +5,9 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#" alt="god">
+                            <a>
                                 <h1>IT-RollCall</h1>
+                                <h4>สมัครสมาชิก</h4>
                             </a>
                         </div>
                         <div class="login-form">
@@ -40,15 +41,27 @@
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <input type="checkbox" id="checkbx" name="agree">ยอมรับ<a @click="$bvModal.hide('bv-modal-example')">ข้อกำหนดและเงื่อนไขการใช้งาน</a>
-                                        <b-modal id="bv-modal-example" hide-footer>
-                                        <template v-slot:modal-title>
-                                            Using <code>$bvModal</code> Methods
-                                        </template>
-                                        <div class="d-block text-center">
-                                            <h3>Hello From This Modal!</h3>
-                                        </div>
-                                        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
+                                        <input type="checkbox" id="checkbx" name="agree">ยอมรับ<a href="javascript:void(0);" @click="$bvModal.show('agreement-modal')">ข้อกำหนดและเงื่อนไขการใช้งาน</a>
+                                        <b-modal id="agreement-modal" size="lg" hide-footer>
+                                            <template v-slot:modal-title>
+                                                <h3>ข้อกำหนดและเงื่อนไขการใช้งาน</h3>
+                                            </template>
+                                            <div class="d-block">
+                                                <h4>ด้านความปลอดภัย</h4>
+                                                <p>
+                                                    - ห้ามฆ่าสัตว์<br>
+                                                    - ห้ามลักทรัพย์<br>
+                                                    - ห้ามประพฤติผิดในกาม<br>
+                                                    - ห้ามประพฤติผิดในกาม<br>
+                                                    - ห้ามประพฤติผิดในกาม<br>
+                                                    - ห้ามประพฤติผิดในกาม<br>
+                                                    - ห้ามประพฤติผิดในกาม<br>
+                                                    - ห้ามประพฤติผิดในกาม<br>
+                                                    <!-- Mockup data wait for update -->
+                                                </p>
+                                            </div>
+                                            <hr>
+                                            <button class="btn btn-danger mt-1 float-right" block @click="$bvModal.hide('agreement-modal')">ปิด</button>
                                         </b-modal>
                                     </label>
                                 </div>
@@ -69,6 +82,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
   mounted () {
   },

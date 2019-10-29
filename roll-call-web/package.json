@@ -16,6 +16,7 @@
     "bootstrap-vue": "^2.0.4",
     "js-cookies": "^1.0.4",
     "nprogress": "^0.2.0",
+    "sweetalert2": "^8.18.6",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.5",
     "vue-cookies": "^1.5.13",
