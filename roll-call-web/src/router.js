@@ -21,27 +21,27 @@ const router = new Router({
       }
     },
     {
-      path: '/Auth',
-      name: 'Auth',
+      path: '/Class',
+      name: 'Class',
       mode: 'history',
       component: () => import('@/components/Auth'),
       children: [
         {
-          path: 'Login',
-          name: 'Login',
-          component: () => import('@/components/Auth/Login'),
+          path: 'Create/1',
+          name: 'Create_1',
+          component: () => import('@/components/Class/Create_1'),
           meta: {
-            title: 'เข้าสู่ระบบ',
+            title: 'สร้างห้องเรียน',
             requiredAuth: false,
             PreventAuth: true
           }
         },
         {
-          path: 'Register',
-          name: 'Register',
-          component: () => import('@/components/Auth/Register'),
+          path: 'Create/2',
+          name: 'Create_2',
+          component: () => import('@/components/Class/Create_2'),
           meta: {
-            title: 'สมัครสมาชิก',
+            title: 'สร้างห้องเรียน',
             requiredAuth: false,
             PreventAuth: true
           }
@@ -58,11 +58,54 @@ const router = new Router({
         }
       ],
       meta: {
-        title: 'รับรองบัญชี',
+        title: 'จัดการห้องเรียน',
         requiredAuth: false,
         PreventAuth: true
       }
     },
+    // {
+    //   path: '/Auth',
+    //   name: 'Auth',
+    //   mode: 'history',
+    //   component: () => import('@/components/Auth'),
+    //   children: [
+    //     {
+    //       path: 'Login',
+    //       name: 'Login',
+    //       component: () => import('@/components/Auth/Login'),
+    //       meta: {
+    //         title: 'เข้าสู่ระบบ',
+    //         requiredAuth: false,
+    //         PreventAuth: true
+    //       }
+    //     },
+    //     {
+    //       path: 'Register',
+    //       name: 'Register',
+    //       component: () => import('@/components/Auth/Register'),
+    //       meta: {
+    //         title: 'สมัครสมาชิก',
+    //         requiredAuth: false,
+    //         PreventAuth: true
+    //       }
+    //     },
+    //     {
+    //       path: '*',
+    //       name: 'Page Not found',
+    //       component: () => import('@/components/404'),
+    //       meta: {
+    //         title: 'ERROR 404',
+    //         requiredAuth: false,
+    //         PreventAuth: false
+    //       }
+    //     }
+    //   ],
+    //   meta: {
+    //     title: 'รับรองบัญชี',
+    //     requiredAuth: false,
+    //     PreventAuth: true
+    //   }
+    // },
     {
       path: '/Home',
       name: 'Home',
