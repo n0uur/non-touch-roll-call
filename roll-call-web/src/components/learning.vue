@@ -9,7 +9,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="overview-wrap mb-2">
-                    <h2 class="title-1">จัดการห้องเรียน</h2>
+                    <h2 class="title-1">จัดการห้องเรียน {{ classroom.id }}</h2>
                   </div>
                 </div>
               </div>
@@ -39,33 +39,31 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <transition name="slide-fade" v-for="i in 20">
-                    <div class="col-md-4 col-lg-3">
-                      <div class="card">
-                        <div class="card-header">
-                          <i class="fa fa-user"></i>
-                          <strong class="card-title pl-2">6207{{ i }}</strong>
-                        </div>
-                        <div class="card-body">
-                          <div class="mx-auto d-block">
-                            <img
-                              class="rounded-circle mx-auto d-block"
-                              src="https://media1.tenor.com/images/b9c59363e7dd35cb7c19d8736b102d99/tenor.gif?itemid=13730968"
-                              alt="Card image cap"
-                            />
-                            <h4 class="text-sm-center mt-2 mb-1">พี่โต{{i}}</h4>
-                            <div class="location text-sm-left">
-                              <i class="fa fa-clock"></i> เวลาเข้าเรียน : ###
-                              <br />
-                              <i class="fa fa-clock"></i> เวลาออก : -
-                            </div>
+                <transition-group name="slide-fade" tag="div" class="row">
+                  <div class="col-md-4 col-lg-3" v-for="i in 6" :key="i">
+                    <div class="card">
+                      <div class="card-header">
+                        <i class="fa fa-user"></i>
+                        <strong class="card-title pl-2">6207{{ i }}</strong>
+                      </div>
+                      <div class="card-body">
+                        <div class="mx-auto d-block">
+                          <img
+                            class="rounded-circle mx-auto d-block"
+                            src="https://media1.tenor.com/images/b9c59363e7dd35cb7c19d8736b102d99/tenor.gif?itemid=13730968"
+                            alt="Card image cap"
+                          />
+                          <h4 class="text-sm-center mt-2 mb-1">พี่โต{{i}}</h4>
+                          <div class="location text-sm-left">
+                            <i class="fa fa-clock"></i> เวลาเข้าเรียน : -
+                            <br />
+                            <i class="fa fa-clock"></i> เวลาออก : -
                           </div>
                         </div>
                       </div>
                     </div>
-                  </transition>
-                </div>
+                  </div>
+                </transition-group>
               </div>
             </div>
             <div class="row">
@@ -90,13 +88,19 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 export default {
   data() {
     return {
-      show: true
+      show: true,
+      classroom: {
+        id: '#testing'
+      }
     };
   }
 };
 </script>
 
 <style scoped>
+* {
+  transition: all 0.3s;
+}
 .slide-fade-enter-active {
   transition: all 0.3s ease;
 }
