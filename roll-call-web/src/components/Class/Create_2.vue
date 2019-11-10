@@ -80,11 +80,11 @@ export default {
                 cancelButtonText: 'ยกเลิก'
             }).then((result) => {
                 if(result.value) {
-                    if (this.classForm.customTime && (this.classForm.classStartTime != '' && this.classForm.classEndTime != '')) {
+                    if (!this.classForm.customTime || (this.classForm.customTime && (this.classForm.classStartTime != '' && this.classForm.classEndTime != ''))) {
                         // Axios post
-                        // Nothing Now
+                        
                         //
-                        // this.$router.push({path: '2'})
+                        this.$router.push({path: '/class/view/' + axiosReturnedRoomID})
                     }
                     else {
                         Swal.fire(

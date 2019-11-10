@@ -47,6 +47,16 @@ const router = new Router({
           }
         },
         {
+          path: 'view',
+          name: 'View Class',
+          component: () => import('@/components/Class/view'),
+          meta: {
+            title: 'ดูห้องเรียน',
+            requiredAuth: false,
+            PreventAuth: true
+          }
+        },
+        {
           path: '*',
           name: 'Page Not found',
           component: () => import('@/components/404'),
