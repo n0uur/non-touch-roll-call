@@ -128,17 +128,6 @@ const router = new Router({
       }
     },
     {
-      path: '/onlearn',
-      name: 'learning',
-      mode: 'history',
-      component: () => import('@/components/learning'),
-      meta: {
-        title: 'กำลังหัดเขียน Vue',
-        requiredAuth: true,
-        PreventAuth: false
-      }
-    },
-    {
       path: '*',
       name: 'Page Not Found',
       mode: 'history',
