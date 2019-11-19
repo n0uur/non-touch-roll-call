@@ -69,7 +69,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="copyright">
-                  <p>Copyright © 2019 IT@KMITL. All rights reserved. Template by Me.</p>
+                  <p>Copyright © {{new Date().getFullYear()}} IT@KMITL. All rights reserved. Template by Me.</p>
                 </div>
               </div>
             </div>
