@@ -1,22 +1,21 @@
 # NON-TOUCH ROLL-CALL | KMITL PSIT 2019
-## *อยู่ในระหว่างการจัดเตรียมศึกษาข้อมูล*
+## *อยู่ระหว่างจัดทำ*
 
 ### รายละเอียด
 > *รอการอัปเดต*
 
+> *ปรับ Repositorie เป็นแบบส่วนตัวเพื่อความปลอดภัยของ API (รหัสผ่าน SQL)*
+
 ### เครื่องมือที่จะใช้ในการทำ
  - Python 3.7
- 	 - ~~nfcpy~~
  - NodeJS
 	 - VueJS
 	 - WebSocket
  - NFC
-	 - ~~Web NFC API~~
  - SQL
  	 - MariaDB
 
 ### อ้างอิง
- - ~~[WEB NFC API](https://www.w3.org/TR/nfc/)~~
  - [Socket.io](https://socket.io/)
  - [Websocket with VueJS](https://www.npmjs.com/package/vue-native-websocket)
  - [Python 3.7](https://docs.python.org/3.7/)
