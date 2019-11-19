@@ -37,13 +37,19 @@ ClassController.get('/getall', (req, res) => {
     })
 })
 
+ClassController.post('/join', (req, res) => {
+    const { classid, cardid } = req.body
+    console.log("\x1b[42mStudent Attending Classroom: " + cardid + classid + "\x1b[0m")
+    
+})
+
 ClassController.post('/create', (req, res) => {
     const { subject, instructor, password } = req.body
 
     var generatedID = Math.floor(Math.random()*90000) + 10000
     var hashPassword = SHA256(password)
 
-    console.log("Created Classroom:" + generatedID, subject, instructor)
+    console.log("\x1b[41mCreated Classroom: " + generatedID, subject, instructor + "\x1b[0m")
 
     conn.query("INSERT INTO classroom_data (Class_ID, Class_Subject, Class_Instructor, Class_Password) VALUE (?, ?, ?, ?)", [generatedID, subject, instructor, hashPassword], (error, results, fields) => {
         if (error) {
