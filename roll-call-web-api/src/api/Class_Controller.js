@@ -37,10 +37,10 @@ ClassController.get('/getall', (req, res) => {
     })
 })
 
-ClassController.post('/join', (req, res) => {
+ClassController.post('/attend', (req, res) => {
     const { classid, cardid } = req.body
-    console.log("\x1b[42mStudent Attending Classroom: " + cardid + classid + "\x1b[0m")
-    
+    console.log("\x1b[42mStudent Attending Classroom: " + cardid + ' ' + classid + "\x1b[0m")
+    res.status(200).send({status: '200'})
 })
 
 ClassController.post('/create', (req, res) => {
