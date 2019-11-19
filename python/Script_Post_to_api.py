@@ -1,7 +1,8 @@
 """Script_Post_to_api"""
 import winsound
 import requests
-import time
+import calendar
+from datetime import datetime
 
 def error():
     """Return Error Function"""
@@ -26,9 +27,10 @@ def script():
     classID = input()
     while True:
         cardID = input()
-        timestamp = time.ctime()
+        tsutc = datetime.utcnow() #UTC Timestamp
+        tsutx = calendar.timegm(tsutc.utctimetuple()) #covert UTC to UTX Timestamp
         if cardID.isdigit() == True and len(cardID) == 10:
-            api_post(classID, cardID, timestamp)
+            api_post(classID, cardID, tsutx)
         else:
             error()
 
