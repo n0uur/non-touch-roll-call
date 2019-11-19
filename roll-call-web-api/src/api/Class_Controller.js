@@ -22,7 +22,7 @@ ClassController.get('/get/:classid', (req, res) => {
     })
 })
 
-ClassController.get('/all', (req, res) => {
+ClassController.get('/getall', (req, res) => {
     const { classid } = req.params
 
     conn.query("SELECT * from classroom_data", (error, results, fields) => {

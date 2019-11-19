@@ -19,7 +19,7 @@ StudentController.get('/get/:cardid', (req, res) => {
     }
 })
 
-StudentController.get('/all', (req, res) => {
+StudentController.get('/getall', (req, res) => {
     try {
         query = "SELECT * from student_data"
         conn.query(query, (error, results, fields) => {
