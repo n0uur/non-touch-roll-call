@@ -1,7 +1,7 @@
 """Script_Post_to_api"""
 import winsound
 import requests
-
+import time
 
 def error():
     """Return Error Function"""
@@ -9,9 +9,9 @@ def error():
     winsound.Beep(2500, 750)
 
 
-def api_post(classID, data):
+def api_post(classID, cardID, timestamp):
     """Return api_shoot Function"""
-    param = {"ClassID": classID, "CardID": data}
+    param = {"ClassID": classID, "CardID": cardID, "Timestamp": timestamp}
     res = requests.post("https://api-t2o.ktnis.me", params=param)
     if res.text == "200":
         print("Success")
@@ -24,15 +24,13 @@ def api_post(classID, data):
 def script():
     """Script to shoot api"""
     classID = input()
-    if len(classID) == 5:
-        while True:
-            data = input()
-            if data.isdigit() == True and len(data) == 10:
-                api_post(classID, data)
-            else:
-                error()
-    else:
-        error()
+    while True:
+        cardID = input()
+        timestamp = time.ctime()
+        if cardID.isdigit() == True and len(cardID) == 10:
+            api_post(classID, cardID, timestamp)
+        else:
+            error()
 
 
 script()
