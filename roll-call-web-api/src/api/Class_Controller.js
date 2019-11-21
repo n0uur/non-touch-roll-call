@@ -56,7 +56,7 @@ ClassController.post('/scan', (req, res) => {
     try {
         const { classid, cardid } = req.body
 
-        conn.query("SELECT COUNT(*), Class_Status from classroom_data WHERE Class_ID = ?", [classid], (error, results, fields) => {
+        conn.query("SELECT COUNT(*), Class_Status from classroom_data WHERE Class_ID = ? and Class_Status != 0", [classid], (error, results, fields) => {
             if (error) {
                 console.log(error)
                 res.status(500).send()
@@ -100,8 +100,34 @@ ClassController.post('/scan', (req, res) => {
                                         }
                                     })
                                 }
-                                else if (results[0]['Class_Status'] == 2) { // ห้องกำลังเปิดให้เช็คชื่อออก
-                                    conn.query("UPDATE classroom_std set STD_Status=2, Leave_Time=NOW() ", (error5, results5, fields5) => {
+                                else if (results[0]['Class_Status'] == 2) { // ห้องเรียนกำลังเรียน มาสาย
+                                    conn.query("SELECT COUNT(*), STD_ID from classroom_std WHERE STD_ID = ?", [tmp_stdid], (error5, results5, fields5) => {
+                                        if (error5) {
+                                            console.log(error2)
+                                            res.status(500).send()
+                                        }
+                                        else {
+                                            if (results5[0]['COUNT(*)'] > 0) {
+                                                res.status(200).send({status: 200, message: 'student existed but ok'})
+                                                console.log("\x1b[42mStudent Attending Classroom (Late, Existed): " + cardid + ' ' + classid + "\x1b[0m")
+                                            }
+                                            else {
+                                                conn.query("INSERT INTO classroom_std set Class_ID=?, STD_CardID=?, STD_ID=?, Attend_Status=2", [classid, cardid, tmp_stdid], (error3, results3, fields3) => {
+                                                    if (error3) {
+                                                        console.log(error3)
+                                                        res.status(500).send()
+                                                    }
+                                                    else {
+                                                        res.status(200).send({status: 200, message: 'success (Late)'})
+                                                        console.log("\x1b[42mStudent Attending Classroom (Late): " + cardid + ' ' + classid + "\x1b[0m")
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    })
+                                }
+                                else if (results[0]['Class_Status'] == 3) { // ห้องกำลังเปิดให้เช็คชื่อออก
+                                    conn.query("UPDATE classroom_std set STD_Status=0, Leave_Time=NOW() ", (error5, results5, fields5) => {
                                         if (error5) {
                                             console.log(error5)
                                             res.status(500).send()
@@ -123,7 +149,7 @@ ClassController.post('/scan', (req, res) => {
                     })
                 }
                 else {
-                    res.status(404).send({status: 404, message: 'classroom notfound'})
+                    res.status(404).send({status: 404, message: 'classroom not available'})
                 }
             }
         })
