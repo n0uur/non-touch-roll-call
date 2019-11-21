@@ -2,6 +2,7 @@
 import winsound
 import requests
 import calendar
+import json
 from datetime import datetime
 
 def error():
@@ -9,12 +10,13 @@ def error():
     print("Error")
     winsound.Beep(2500, 750)
 
-
+def recive_paramita
 def attend_api_post(classID, cardID, timestamp):
     """Function to send student attendance API data to the web and receive data from the website"""
     param = {"ClassID": classID, "CardID": cardID, "Timestamp": timestamp}
     res = requests.post("https://api-t2o.ktnis.me", params=param)
-    if res.text == "200":
+
+    if json.loads(res.text).get('status', 404) == 200:
         print("Success")
         for _ in range(2):
             winsound.Beep(2500, 350)
@@ -26,7 +28,7 @@ def stdreg_api_post(cardID, studentID):
     """This function is used to send the registration API data and receive data from the website."""
     param = {"CardID": cardID, "StudentID": studentID}
     res = requests.post("https://api-t2o.ktnis.me", params=param)
-    if res.text == "200":
+    if json.loads(res.text).get('status', 404) == 200:
         print("Success")
         for _ in range(2):
             winsound.Beep(2500, 350)
