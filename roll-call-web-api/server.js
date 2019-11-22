@@ -4,6 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 
+const PORT = 3000
+
 // var Auth = require('./src/api/Auth')
 // var User_Controller = require('./src/api/User_Controller')
 var Class_Controller = require('./src/api/Class_Controller')
@@ -27,8 +29,8 @@ app.use('/std', Student_Controller)
 
 // require('./src/api/Class_Controller')(app)
 
-var server = app.listen(3000, function () {
-    console.log("Listening on port *:3000")
+var server = app.listen(PORT, function () {
+    console.log("Listening on PORT: " + PORT)
 })
 
 // Socket.io's part
