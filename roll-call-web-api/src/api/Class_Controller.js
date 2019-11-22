@@ -74,7 +74,7 @@ ClassController.post('/scan', (req, res) => {
                                 // ตรวจสอบ ID ห้องและนักเรียนแล้ว เริ่มทำงาน
                                 if (results[0]['Class_Status'] == 1) { // ห้องเรียนกำลังเรียน, รับนักเรียนเพิ่ม
 
-                                    conn.query("SELECT COUNT(*), STD_ID from classroom_std WHERE STD_ID = ?", [tmp_stdid], (error4, results4, fields4) => {
+                                    conn.query("SELECT COUNT(*), STD_ID from classroom_std WHERE STD_ID = ? and Class_ID = ?", [tmp_stdid, classid], (error4, results4, fields4) => {
                                         if (error4) {
                                             console.log(error2)
                                             res.status(500).send()
@@ -83,7 +83,6 @@ ClassController.post('/scan', (req, res) => {
                                             if (results4[0]['COUNT(*)'] > 0) {
                                                 res.status(200).send({status: 200, message: 'student existed but ok'})
                                                 console.log("\x1b[42mStudent Attending Classroom (Existed): " + cardid + ' ' + classid + "\x1b[0m")
-
                                             }
                                             else {
                                                 conn.query("INSERT INTO classroom_std set Class_ID=?, STD_CardID=?, STD_ID=?", [classid, cardid, tmp_stdid], (error3, results3, fields3) => {
