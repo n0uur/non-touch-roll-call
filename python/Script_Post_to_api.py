@@ -5,35 +5,13 @@ import calendar
 import json
 from datetime import datetime
 
-def error():
-    """Return Error Function"""
-    print("Error")
-    winsound.Beep(2500, 750)
-
-def recive_paramita
-def attend_api_post(classID, cardID, timestamp):
-    """Function to send student attendance API data to the web and receive data from the website"""
-    param = {"ClassID": classID, "CardID": cardID, "Timestamp": timestamp}
-    res = requests.post("https://api-t2o.ktnis.me", params=param)
-
-    if json.loads(res.text).get('status', 404) == 200:
-        print("Success")
-        for _ in range(2):
-            winsound.Beep(2500, 350)
+def start():
+    """Function to start the system by scanning to attend class"""
+    classID = input()
+    if classID == "stdreg":
+        stdreg()
     else:
-        error()
-
-
-def stdreg_api_post(cardID, studentID):
-    """This function is used to send the registration API data and receive data from the website."""
-    param = {"CardID": cardID, "StudentID": studentID}
-    res = requests.post("https://api-t2o.ktnis.me", params=param)
-    if json.loads(res.text).get('status', 404) == 200:
-        print("Success")
-        for _ in range(2):
-            winsound.Beep(2500, 350)
-    else:
-        error()
+        attend_class(classID)
 
 
 def stdreg():
@@ -47,6 +25,7 @@ def stdreg():
         else:
             error()
 
+
 def attend_class(classID):
     """Functions for using student card scanning To attend class"""
     while True:
@@ -58,15 +37,34 @@ def attend_class(classID):
         else:
             error()
 
-def start():
-    """Function to start the system by scanning to attend class"""
-    classID = input()
-    if classID == "stdreg":
-        stdreg()
+
+def attend_api_post(classID, cardID, timestamp):
+    """Function to send student attendance API data to the web and receive data from the website"""
+    param = {"ClassID": classID, "CardID": cardID, "Timestamp": timestamp}
+    res = requests.post("https://api-t2o.ktnis.me", params=param)
+    recive_paramita(res)
+
+
+def stdreg_api_post(cardID, studentID):
+    """This function is used to send the registration API data and receive data from the website."""
+    param = {"CardID": cardID, "StudentID": studentID}
+    res = requests.post("https://api-t2o.ktnis.me", params=param)
+    recive_paramita(res)
+
+
+def recive_paramita(res):
+    if json.loads(res.text).get('status', 404) == 200:
+        now = datetime.now()
+        print("Success", now.strftime("%Y-%m-%d %H:%M:%S"))
+        for _ in range(2):
+            winsound.Beep(2500, 350)
     else:
-        attend_class(classID)
+        error()
 
 
-
+def error():
+    """Return Error Function"""
+    print("Error")
+    winsound.Beep(2500, 750)
 
 start()
