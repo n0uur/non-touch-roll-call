@@ -8,20 +8,21 @@ from datetime import datetime
 
 def start():
     """Function to start the system by scanning to attend class"""
-    classID = input()
+    classID = input("Please fill in the classname:")
+    num_std_in_class = int(input("Please enter the number of students:"))
     if classID == "stdreg":
         stdreg()
     else:
-        attend_class(classID)
+        attend_class(classID, num_std_in_class)
 
 
 def stdreg():
     """This function is used for registration. By student ID and student ID"""
     while True:
-        cardID = input()
+        cardID = input("Please tap the card:")
         if cardID == "End":
             terminate_program()
-        studentID = input()
+        studentID = input("Please enter the student id:")
         if cardID.isdigit() == True and len(cardID) == 10 \
             and studentID.isdigit() == True and len(studentID) == 8:
             stdreg_api_post(cardID, studentID)
@@ -29,12 +30,16 @@ def stdreg():
             error()
 
 
-def attend_class(classID):
+def attend_class(classID, num_std_in_class):
     """Functions for using student card scanning To attend class"""
+    num_std_attend = 0
     while True:
-        cardID = input()
+        cardID = input("Please tap the card:")
         if cardID == "End":
+            percentage = percentage_attending_class(num_std_in_class, num_std_attend)
+            print("The number of students attending the class is %.2f percent of the total students."%percentage)
             terminate_program()
+        num_std_attend += 1
         timestamp_utc = datetime.utcnow() #UTC Timestamp
         timestamp_utx = calendar.timegm(timestamp_utc.utctimetuple()) #covert UTC to Unix Timestamp
         if cardID.isdigit() == True and len(cardID) == 10:
@@ -68,8 +73,15 @@ def recive_paramita(res):
         error()
 
 
+def percentage_attending_class(num_std_in_class, num_std_attend):
+    """The function calculates the student's attendance  as a percentage"""
+    percentage = (num_std_attend/num_std_in_class)*100
+    return percentage
+    
+
+
 def terminate_program():
-    """This function is used to stop the program"""
+    """This function is used to theminate the program"""
     sys.exit()
 
 
