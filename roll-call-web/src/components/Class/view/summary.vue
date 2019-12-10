@@ -39,10 +39,10 @@
                   <i class="fas fa-smile"></i> นามสกุล
                 </th>
                 <th>
-                  <i class="fas fa-user-clock"></i> เวลาเข้าเรียน
+                  <i class="fas fa-clock"></i> เวลาเข้าเรียน
                 </th>
                 <th>
-                  <i class="fas fa-user-clock"></i> เวลาออก
+                  <i class="fas fa-clock"></i> เวลาออก
                 </th>
                 <th>
                   <i class="fas fa-check-square"></i> สถานะ
