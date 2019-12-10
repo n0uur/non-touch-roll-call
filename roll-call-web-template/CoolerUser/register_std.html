@@ -143,7 +143,7 @@
                 /[\/\\]([\w\d\s\.\-\(\)]+)$/
                 )[1];
             } else {
-                customTxt.innerHTML = "No file chosen, yet.";
+                customTxt.innerHTML = "ยังไม่ได้เลือกรูปภาพ";
             }
             });
         function sweetal() {
@@ -157,7 +157,7 @@
             cancelButtonText: 'ยกเลิก',
             confirmButtonText: 'ยืนยัน'
                 }).then((result) => {
-                    if (document.getElementById('status_text').innerHTML != "No file chosen, yet."
+                    if (document.getElementById('status_text').innerHTML != "ยังไม่ได้เลือกรูปภาพ"
                     && document.getElementById('std_id').value != '' && document.getElementById('first').value != '' && document.getElementById('last').value != ''){
                     Swal.fire({
                         type: 'success',
