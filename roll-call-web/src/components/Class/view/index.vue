@@ -90,6 +90,7 @@
 import io from 'socket.io-client'
 import axios from 'axios'
 import _ from 'lodash'
+import Swal from 'sweetalert2'
 
 export default {
   data() {
