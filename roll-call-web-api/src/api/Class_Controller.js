@@ -62,10 +62,10 @@ ClassController.get('/get/:classid', (req, res) => {
         else {
             res.header("Content-Type", 'application/json')
             if (results.length > 0) {
-                res.status(200).send(JSON.stringify(results[0], null, 2))
+                res.status(200).send(JSON.stringify(Object.assign({}, {status: 200}, results[0]) , null, 2))
             }
             else {
-                res.status(404).send(JSON.stringify({status: 404}, null, 2))
+                res.status(200).send(JSON.stringify({status: 404}, null, 2))
             }
         }
     })
@@ -73,21 +73,6 @@ ClassController.get('/get/:classid', (req, res) => {
 
 ClassController.get('/getstd/:classid', (req, res) => {
     const { classid } = req.params
-
-    // getClassStudent(classid)
-    // .then(std_temp => {
-    //     console.log(std_temp)
-    //     if (std_temp) {
-    //         res.header("Content-Type", 'application/json')
-    //         res.status(200).send(JSON.stringify(std_temp, null, 2))
-    //     }
-    //     else {
-    //         res.status(500).send()
-    //     }
-    // })
-    // .catch (e => {
-    //     console.log(e)
-    // })
     
     conn.query("SELECT * from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
         if (error) {
