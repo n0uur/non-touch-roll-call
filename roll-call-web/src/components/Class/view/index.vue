@@ -142,19 +142,6 @@ export default {
       let dateTime = new Date(time)
       return dateTime.getHours() + ":" + dateTime.getMinutes() + ":" + dateTime.getSeconds()
     },
-    // getStudentInfo (stdID) {
-    //   axios({
-    //     method: "GET",
-    //     url: "http://192.168.1.41:3000/std/getid/" + stdID,
-    //     data: []
-    //   })
-    //   .then((res) => {
-    //     studentInfo.push(res)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   });
-    // }
   },
   mounted() {
     this.updateStdData()
@@ -163,6 +150,26 @@ export default {
         if (data.classID == this.classID) { // not good but work <- must find the better way
           this.updateStdData()
         }
+    });
+
+    axios({
+      method: "GET",
+      url: "http://192.168.1.41:3000/class/get/" + this.classID,
+      data: []
+    })
+    .then((res) => {
+      if (res.data.status == 404) {
+        Swal.fire(
+            'ข้อผิดพลาด',
+            'ไม่พบห้องเรียนที่ร้องขอ',
+            'error'
+          ).then (e => {
+          this.$router.push({name: 'AllClass'})
+        })
+      }
+    })
+    .catch((err) => {
+      console.log(err)
     });
   }
 };
