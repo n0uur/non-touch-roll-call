@@ -19,6 +19,23 @@ StudentController.get('/get/:cardid', (req, res) => {
     }
 })
 
+StudentController.get('/getid/:stdid', (req, res) => {
+    try {
+        const { stdid } = req.params
+
+        conn.query("SELECT * from student_data WHERE STD_ID = ?", [stdid], (error, results, fields) => {
+            if (error) {
+                console.log(error)
+            }
+            res.header("Content-Type", 'application/json')
+            res.status(200).send(JSON.stringify(results[0], null, 2))
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
+
 StudentController.get('/register', (req, res) => {
     try {
         const { cardid } = req.params
