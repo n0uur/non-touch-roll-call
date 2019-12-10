@@ -48,10 +48,30 @@ const router = new Router({
         },
         {
           path: 'view/:classid',
-          name: 'View Class',
+          name: 'ViewClass',
           component: () => import('@/components/Class/view'),
           meta: {
             title: 'ดูห้องเรียน',
+            requiredAuth: false,
+            PreventAuth: true
+          }
+        },
+        {
+          path: 'summary/:classid',
+          name: 'ClassSummary',
+          component: () => import('@/components/Class/view/summary'),
+          meta: {
+            title: 'สรุปห้องเรียน',
+            requiredAuth: false,
+            PreventAuth: true
+          }
+        },
+        {
+          path: 'all',
+          name: 'AllClass',
+          component: () => import('@/components/Class/view/all'),
+          meta: {
+            title: 'ห้องเรียนทั้งหมด',
             requiredAuth: false,
             PreventAuth: true
           }

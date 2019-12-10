@@ -61,28 +61,18 @@ ClassController.get('/get/:classid', (req, res) => {
         }
         else {
             res.header("Content-Type", 'application/json')
-            res.status(200).send(JSON.stringify(results[0], null, 2))
+            if (results.length > 0) {
+                res.status(200).send(JSON.stringify(Object.assign({}, {status: 200}, results[0]) , null, 2))
+            }
+            else {
+                res.status(200).send(JSON.stringify({status: 404}, null, 2))
+            }
         }
     })
 })
 
 ClassController.get('/getstd/:classid', (req, res) => {
     const { classid } = req.params
-
-    // getClassStudent(classid)
-    // .then(std_temp => {
-    //     console.log(std_temp)
-    //     if (std_temp) {
-    //         res.header("Content-Type", 'application/json')
-    //         res.status(200).send(JSON.stringify(std_temp, null, 2))
-    //     }
-    //     else {
-    //         res.status(500).send()
-    //     }
-    // })
-    // .catch (e => {
-    //     console.log(e)
-    // })
     
     conn.query("SELECT * from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
         if (error) {
@@ -190,12 +180,14 @@ ClassController.post('/scan', (req, res) => {
                                     })
                                 }
                                 else if (results[0]['Class_Status'] == 3) { // ห้องกำลังเปิดให้เช็คชื่อออก
-                                    conn.query("UPDATE classroom_std set STD_Status=0, Leave_Time=NOW() ", (error5, results5, fields5) => {
+                                    conn.query("UPDATE classroom_std set STD_Status=0, Leave_Time=NOW() WHERE Class_ID = ? and STD_CardID = ?", [classid, cardid], (error5, results5, fields5) => {
                                         if (error5) {
                                             console.log(error5)
                                             res.status(500).send()
                                         }
                                         else {
+                                            io.emit('updateStd', {classID: classid})
+
                                             res.status(200).send({status: 200, message: 'left classroom'})
                                             console.log("\x1b[42mStudent Leaving Classroom: " + cardid + ' ' + classid + "\x1b[0m")
                                         }
