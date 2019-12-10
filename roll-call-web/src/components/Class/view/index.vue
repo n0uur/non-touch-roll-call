@@ -38,8 +38,8 @@
                     </div>
                   </div>
                 </div>
-                <transition-group name="slide-fade" tag="div" class="row" v-if="studentList.lenght > 0">
-                  <div class="col-md-4 col-lg-3" v-for="std in studentList" :key="new Date(std.Attend_Time).getTime()">
+                <transition-group name="slide-fade" tag="div" class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-3" v-for="std in studentList" :key="new Date(std.Attend_Time).getTime()">
                     <div class="card">
                       <div class="card-header">
                         <i class="fa fa-user"></i>
@@ -58,7 +58,7 @@
                           <div class="location text-sm-left">
                             <i class="fa fa-clock"></i> เวลาเข้าเรียน : {{ getDisplayDate(std.Attend_Time) }}
                             <br />
-                            <i class="fa fa-clock"></i> เวลาออก : -
+                            <i class="fa fa-clock"></i> เวลาออก : <b v-if="std.Leave_Time">{{ getDisplayDate(std.Leave_Time) }}</b><b v-else>ยังไม่ออก</b>
                             <br />
                             <i class="far fa-check-square"></i> สถานะ :
                             <button v-if="std.STD_Status == 0" class="btn btn-sm btn-danger">ออก</button>
@@ -70,9 +70,9 @@
                     </div>
                   </div>
                 </transition-group>
-                <div class="row">
+                <div v-if="studentRaw.length == 0" class="row">
                   <div class="col-12 text-center">
-                    <h5>ไม่มีนักศึกษา</h5>
+                    <h4>ไม่มีนักศึกษา</h4>
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export default {
   },
   computed: {
       studentList () {
-        return _.orderBy(this.studentRaw, 'attend_timestamp').reverse()
+        return _.orderBy(this.studentRaw, ['STD_Status' ,'attend_timestamp']).reverse()
       }
   },
   methods: {
