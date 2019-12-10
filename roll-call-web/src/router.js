@@ -57,6 +57,16 @@ const router = new Router({
           }
         },
         {
+          path: 'summary/:classid',
+          name: 'Class Summary',
+          component: () => import('@/components/Class/view/summary'),
+          meta: {
+            title: 'สรุปห้องเรียน',
+            requiredAuth: false,
+            PreventAuth: true
+          }
+        },
+        {
           path: '*',
           name: '404',
           component: () => import('@/components/404'),
