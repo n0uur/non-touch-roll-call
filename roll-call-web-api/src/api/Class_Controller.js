@@ -1,7 +1,34 @@
 var express = require('express')
 var ClassController = express()
 const conn = require('./mysql')
-const crypto = require('crypto');
+const crypto = require('crypto')
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+const bodyParser = require('body-parser')
+const app = express()
+
+var server = app.listen(3010, function () {
+    console.log("WebSocket (Classroom) on PORT: " + 3010)
+})
+
+app.use(bodyParser.json())
+app.disable('x-powered-by')
+
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "*")
+    next()
+})
+
+var socket = require('socket.io')
+var io = socket(server)
+
+io.on('connection', function(socket) {
+    console.log("Connected client: " + socket.id)
+});
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 function SHA256(paintext) {
     return crypto.createHash('sha256').update(paintext).digest('hex');
@@ -92,6 +119,7 @@ ClassController.post('/scan', (req, res) => {
                                                     }
                                                     else {
                                                         res.status(200).send({status: 200, message: 'success'})
+                                                        io.emit('updateStd', tmp_stdid)
                                                         console.log("\x1b[42mStudent Attending Classroom: " + cardid + ' ' + classid + "\x1b[0m")
                                                     }
                                                 })
@@ -118,6 +146,7 @@ ClassController.post('/scan', (req, res) => {
                                                     }
                                                     else {
                                                         res.status(200).send({status: 200, message: 'success (Late)'})
+                                                        io.emit('updateStd', tmp_stdid)
                                                         console.log("\x1b[42mStudent Attending Classroom (Late): " + cardid + ' ' + classid + "\x1b[0m")
                                                     }
                                                 })
@@ -161,7 +190,7 @@ ClassController.post('/scan', (req, res) => {
 ClassController.post('/create', (req, res) => {
     const { subject, instructor, password } = req.body
 
-    var generatedID = Math.floor(Math.random()*90000) + 10000
+    var generatedID = Math.floor(Math.random() * 90000) + 10000
     var hashPassword = SHA256(password)
 
     console.log("\x1b[41mCreated Classroom: " + generatedID, subject, instructor + "\x1b[0m")

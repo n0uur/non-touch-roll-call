@@ -30,10 +30,6 @@ app.use('/std', Student_Controller)
 // require('./src/api/Class_Controller')(app)
 
 var server = app.listen(PORT, function () {
-    console.log("Listening on PORT: " + PORT)
+    console.log("API Listening on PORT: " + PORT)
 })
 
-// Socket.io's part
-
-// var socket = require('socket.io')
-// var io = socket(server)
