@@ -47,7 +47,7 @@ const router = new Router({
           }
         },
         {
-          path: 'view',
+          path: 'view/:classid',
           name: 'View Class',
           component: () => import('@/components/Class/view'),
           meta: {
@@ -58,7 +58,7 @@ const router = new Router({
         },
         {
           path: '*',
-          name: 'Page Not found',
+          name: '404',
           component: () => import('@/components/404'),
           meta: {
             title: 'ERROR 404',
