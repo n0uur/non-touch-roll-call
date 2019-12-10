@@ -61,8 +61,9 @@
                             <i class="fa fa-clock"></i> เวลาออก : -
                             <br />
                             <i class="far fa-check-square"></i> สถานะ :
-                            <button v-if="std.Attend_Status == 1" class="btn btn-sm btn-success">ปกติ</button>
-                            <button v-else class="btn btn-sm btn-danger">สาย</button>
+                            <button v-if="std.STD_Status == 0" class="btn btn-sm btn-danger">ออก</button>
+                            <button v-else-if="std.Attend_Status == 1" class="btn btn-sm btn-success">ปกติ</button>
+                            <button v-else class="btn btn-sm btn-warning">สาย</button>
                           </div>
                         </div>
                       </div>
@@ -88,6 +89,7 @@
 <script>
 import io from 'socket.io-client'
 import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   data() {
@@ -102,22 +104,7 @@ export default {
   },
   computed: {
       studentList () {
-        // temp_list = []
-        // this.studentRaw.forEach(data => {
-        //   axios({
-        //     method: "GET",
-        //     url: "http://192.168.1.41:3000/std/getid/" + data.STD_ID,
-        //     data: []
-        //   })
-        //   .then((res) => {
-        //     data.push(res)
-        //     console.log(data)
-        //   })
-        //   .catch((err) => {
-        //     console.log(err)
-        //   });
-        // });
-        return this.studentRaw.reverse()
+        return _.orderBy(this.studentRaw, 'attend_timestamp').reverse()
       }
   },
   methods: {
@@ -136,7 +123,7 @@ export default {
             data: []
           })
           .then((res) => {
-            temp_list.push(Object.assign({}, e, res.data))
+            temp_list.push(Object.assign({}, e, res.data, {attend_timestamp: new Date(e.Attend_Time).getTime()}))
             // console.log(Object.assign({}, e, res.data))
           })
           .catch((err) => {
