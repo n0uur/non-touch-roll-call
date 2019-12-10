@@ -8,7 +8,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="overview-wrap mb-2">
-                    <h2 class="title-1">จัดการห้องเรียน {{ classID }}</h2>
+                    <h2 class="title-1">จัดการห้องเรียน วิชา {{ classData.Class_Subject + ' โดย ' + classData.Class_Instructor }}</h2>
                   </div>
                 </div>
               </div>
@@ -34,11 +34,11 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="overview-wrap mt-3 mb-2">
-                      <h2 class="title-1">รายชื่อนักศึกษา</h2>
+                      <h2 class="title-1 border-bottom">รายชื่อนักศึกษา</h2>
                     </div>
                   </div>
                 </div>
-                <transition-group name="slide-fade" tag="div" class="row">
+                <transition-group name="slide-fade" tag="div" class="row" v-if="studentList.lenght > 0">
                   <div class="col-md-4 col-lg-3" v-for="std in studentList" :key="new Date(std.Attend_Time).getTime()">
                     <div class="card">
                       <div class="card-header">
@@ -70,6 +70,11 @@
                     </div>
                   </div>
                 </transition-group>
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <h5>ไม่มีนักศึกษา</h5>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -166,6 +171,9 @@ export default {
           ).then (e => {
           this.$router.push({name: 'AllClass'})
         })
+      }
+      else {
+        this.classData = res.data
       }
     })
     .catch((err) => {
