@@ -4,7 +4,6 @@
       <div class="row">
         <div class="col">
           <div class="page-wrapper">
-            <!-- MAIN CONTENT-->
             <div class="container mt-5">
               <div class="row">
                 <div class="col-md-12">
@@ -15,11 +14,11 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <button class="btn btn-warning">
-                    <i class="fa fa-meh"></i> จับนักศึกษามาสาย
-                  </button>
                   <button class="btn btn-success">
                     <i class="fa fa-play"></i> เริ่มห้องเรียน
+                  </button>
+                  <button class="btn btn-warning">
+                    <i class="fa fa-meh"></i> จับนักศึกษามาสาย
                   </button>
                   <button class="btn btn-danger">
                     <i class="fa fa-stop"></i> เลิกคลาส
@@ -40,11 +39,11 @@
                   </div>
                 </div>
                 <transition-group name="slide-fade" tag="div" class="row">
-                  <div class="col-md-4 col-lg-3" v-for="i in pToList" :key="i">
+                  <div class="col-md-4 col-lg-3" v-for="i in studentList" :key="i">
                     <div class="card">
                       <div class="card-header">
                         <i class="fa fa-user"></i>
-                        <strong class="card-title pl-2">6207{{ i }}</strong>
+                        <strong class="card-title pl-2">{{ i }}</strong>
                       </div>
                       <div class="card-body">
                         <div class="mx-auto d-block">
@@ -69,7 +68,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="copyright">
-                  <p>Copyright © {{new Date().getFullYear()}} IT@KMITL. All rights reserved. Template by Me.</p>
+                  <p>Copyright © {{new Date().getFullYear()}} IT@KMITL. All rights reserved.</p>
                 </div>
               </div>
             </div>
@@ -81,21 +80,28 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
 
 export default {
   data() {
     return {
       show: true,
       classroom: {
-        id: '#testing'
+        id: this.$route.params.classid
       },
-      pto: ["Somchai", "Somsak", "Sompong", "pTo"]
+      studentRaw: [],
+      classSocket: io("192.168.1.41:3010")
     };
   },
   computed: {
-      pToList () {
-          return this.pto.reverse()
+      studentList () {
+          return this.studentRaw.reverse()
       }
+  },
+  mounted() {
+    this.socket.on('updateStd', (data) => {
+        this.studentRaw = [...this.studentRaw, data];
+    });
   }
 };
 </script>
