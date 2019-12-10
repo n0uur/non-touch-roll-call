@@ -34,6 +34,23 @@ function SHA256(paintext) {
     return crypto.createHash('sha256').update(paintext).digest('hex');
 }
 
+// async function getClassStudent(classid) {
+//     try {
+//         conn.query("SELECT * from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
+//             if (error) {
+//                 console.log(error)
+//                 return false
+//             }
+//             else {
+//                 return results[0]
+//             }
+//         })
+//     }
+//     catch (e) {
+//         console.log(e)
+//     }
+// }
+
 ClassController.get('/get/:classid', (req, res) => {
     const { classid } = req.params
 
@@ -52,6 +69,21 @@ ClassController.get('/get/:classid', (req, res) => {
 ClassController.get('/getstd/:classid', (req, res) => {
     const { classid } = req.params
 
+    // getClassStudent(classid)
+    // .then(std_temp => {
+    //     console.log(std_temp)
+    //     if (std_temp) {
+    //         res.header("Content-Type", 'application/json')
+    //         res.status(200).send(JSON.stringify(std_temp, null, 2))
+    //     }
+    //     else {
+    //         res.status(500).send()
+    //     }
+    // })
+    // .catch (e => {
+    //     console.log(e)
+    // })
+    
     conn.query("SELECT * from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
         if (error) {
             console.log(error)
@@ -59,7 +91,7 @@ ClassController.get('/getstd/:classid', (req, res) => {
         }
         else {
             res.header("Content-Type", 'application/json')
-            res.status(200).send(JSON.stringify(results[0], null, 2))
+            res.status(200).send(JSON.stringify(results, null, 2))
         }
     })
 })
@@ -118,8 +150,9 @@ ClassController.post('/scan', (req, res) => {
                                                         res.status(500).send()
                                                     }
                                                     else {
+                                                        io.emit('updateStd', {classID: classid})
+
                                                         res.status(200).send({status: 200, message: 'success'})
-                                                        io.emit('updateStd', tmp_stdid)
                                                         console.log("\x1b[42mStudent Attending Classroom: " + cardid + ' ' + classid + "\x1b[0m")
                                                     }
                                                 })
@@ -145,8 +178,10 @@ ClassController.post('/scan', (req, res) => {
                                                         res.status(500).send()
                                                     }
                                                     else {
+                                                        io.emit('updateStd', {classID: classid})
+
                                                         res.status(200).send({status: 200, message: 'success (Late)'})
-                                                        io.emit('updateStd', tmp_stdid)
+
                                                         console.log("\x1b[42mStudent Attending Classroom (Late): " + cardid + ' ' + classid + "\x1b[0m")
                                                     }
                                                 })
