@@ -14,18 +14,18 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <button class="btn btn-success">
+                  <button class="btn btn-success" @click="sendUpdateClass(1)">
                     <i class="fa fa-play"></i> เริ่มห้องเรียน
                   </button>
-                  <button class="btn btn-warning">
+                  <button class="btn btn-warning" @click="sendUpdateClass(2)">
                     <i class="fa fa-meh"></i> จับนักศึกษามาสาย
                   </button>
-                  <button class="btn btn-danger">
+                  <button class="btn btn-danger" @click="sendUpdateClass(3)">
                     <i class="fa fa-stop"></i> เลิกคลาส
                   </button>
-                  <button class="btn btn-danger float-right">
+                  <!-- <button class="btn btn-danger float-right">
                     <i class="fa fa-trash"></i> ลบคลาส
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="overview-wrap mt-3 mb-2">
-                      <h2 class="title-1 border-bottom">รายชื่อนักศึกษา</h2>
+                      <h2 class="title-1 border-bottom">รายชื่อนักศึกษา <i @click="updateStdData()" class="fas fa-redo-alt text-primary hover-trans" style="font-size: 15px"></i></h2>
                     </div>
                   </div>
                 </div>
@@ -143,6 +143,88 @@ export default {
         console.log(err)
       });
     },
+    updateClassData() {
+      axios({
+        method: "GET",
+        url: "http://192.168.1.41:3000/class/get/" + this.classID,
+        data: []
+      })
+      .then((res) => {
+        if (res.data.status == 404) {
+          Swal.fire(
+              'ข้อผิดพลาด',
+              'ไม่พบห้องเรียนที่ร้องขอ',
+              'error'
+            ).then (e => {
+            this.$router.push({name: 'AllClass'})
+          })
+        }
+        else {
+          this.classData = res.data
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+    },
+    sendUpdateClass(updateToStatus) {
+      // console.log(updateToStatus)
+      let text_status = 'ข้อผิดพลาด อย่ากดต่อ'
+
+      if (updateToStatus == 1) {
+        text_status = 'ยืนยันที่จะเริ่มห้องเรียน'
+      }
+      else if (updateToStatus == 2) {
+        text_status = 'ยืนยันที่จะจับนักศึกษามาสาย'
+      }
+      else if (updateToStatus == 3) {
+        text_status = 'ยืนยันที่จะเลิกคลาส (นักศึกษาที่ยังไม่ลงชื่อออก จะถูกลงว่าหนีการเรียน)'
+      }
+
+      Swal.fire({
+        title: 'กรอกรหัสผ่านห้องเรียนเพื่อยืนยัน',
+        text: text_status,
+        input: 'password',
+        type: 'warning',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        cancelButtonText: 'ยกเลิก',
+        confirmButtonText: 'ยืนยัน',
+        showLoaderOnConfirm: true,
+        preConfirm: (login) => {
+          return axios({
+            method: "POST",
+            url: "http://192.168.1.41:3000/class/update/" + this.classID,
+            data: {
+              password: login,
+              status: updateToStatus
+            }
+          })
+          .then((res) => {
+            if (res.data.status == 404) {
+              Swal.showValidationMessage(
+                'รหัสผ่านผิด'
+              )
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'สำเร็จ',
+            'อัปเดตห้องเรียนสำเร็จ',
+            'success'
+          )
+          this.updateClassData()
+        }
+      })
+    },
     getDisplayDate(time) {
       let dateTime = new Date(time)
       return dateTime.getHours() + ":" + dateTime.getMinutes() + ":" + dateTime.getSeconds()
@@ -154,31 +236,11 @@ export default {
     this.classSocket.on('updateStd', (data) => {
         if (data.classID == this.classID) { // not good but work <- must find the better way
           this.updateStdData()
+          this.updateClassData()
         }
     });
 
-    axios({
-      method: "GET",
-      url: "http://192.168.1.41:3000/class/get/" + this.classID,
-      data: []
-    })
-    .then((res) => {
-      if (res.data.status == 404) {
-        Swal.fire(
-            'ข้อผิดพลาด',
-            'ไม่พบห้องเรียนที่ร้องขอ',
-            'error'
-          ).then (e => {
-          this.$router.push({name: 'AllClass'})
-        })
-      }
-      else {
-        this.classData = res.data
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    });
+    this.updateClassData()
   }
 };
 </script>
@@ -197,5 +259,12 @@ export default {
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+
+.hover-trans:hover {
+  transform: scale(1.1) rotate(40deg);
+}
+.hover-trans:active {
+  transform: rotate(150deg);
 }
 </style>
