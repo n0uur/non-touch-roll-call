@@ -8,7 +8,16 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="overview-wrap mb-2">
-                    <h2 class="title-1">จัดการห้องเรียน วิชา {{ classData.Class_Subject + ' โดย ' + classData.Class_Instructor }}</h2>
+                    <h2 class="title-1">จัดการห้องเรียน วิชา {{ classData.Class_Subject + ' โดย ' + classData.Class_Instructor }}
+                      [สถานะ :
+                      <button v-if="classData.Class_Status == 0" class="btn btn-primary">ยังไม่เปิด</button>
+                      <button v-if="classData.Class_Status == 1" class="btn btn-success">เปิด</button>
+                      <button v-if="classData.Class_Status == 2" class="btn btn-warning">สาย</button>
+                      <button v-if="classData.Class_Status == 3" class="btn btn-danger">ลงชื่อออก</button>
+                      <button v-if="classData.Class_Status == 4" class="btn btn-dark">ปิด</button>
+                      <i @click="updateClassData()" class="fas fa-redo-alt text-primary hover-trans" style="font-size: 15px"></i>
+                      ]
+                    </h2>
                   </div>
                 </div>
               </div>
@@ -178,7 +187,7 @@ export default {
         text_status = 'ยืนยันที่จะจับนักศึกษามาสาย'
       }
       else if (updateToStatus == 3) {
-        text_status = 'ยืนยันที่จะเลิกคลาส (นักศึกษาที่ยังไม่ลงชื่อออก จะถูกลงว่าหนีการเรียน)'
+        text_status = 'ยืนยันที่จะเลิกคลาส (เปิดให้นักศึกษาลงชื่อออก)'
       }
 
       Swal.fire({
