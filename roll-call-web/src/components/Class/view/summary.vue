@@ -24,7 +24,7 @@
           </button>
           <button class="btn btn-success">
             <i class="fas fa-download"></i>
-            ดาวน์โหลดสรุป CVS
+            ดาวน์โหลดสรุป CSV
           </button>
         </div>
       </div>
@@ -37,16 +37,16 @@
                   <i class="fas fa-user-circle"></i> รหัสนักศีกษา
                 </th>
                 <th>
-                  <i class="fas fa-smile"></i> ชื่อ
+                  <i class="fas fa-user"></i> ชื่อ
                 </th>
                 <th>
-                  <i class="fas fa-smile"></i> นามสกุล
+                  นามสกุล
                 </th>
                 <th>
-                  <i class="fas fa-clock"></i> เวลาเข้าเรียน
+                  <i class="far fa-clock"></i> เวลาเข้าเรียน
                 </th>
                 <th>
-                  <i class="fas fa-clock"></i> เวลาออก
+                  <i class="far fa-clock"></i> เวลาออก
                 </th>
                 <th>
                   <i class="fas fa-check-square"></i> สถานะ
@@ -185,7 +185,7 @@ export default {
         }
         else {
           this.classData = res.data
-          console.log(res.data.Class_Status)
+          // console.log(res.data.Class_Status)
         }
       })
       .catch((err) => {
