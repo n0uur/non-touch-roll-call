@@ -229,14 +229,14 @@ ClassController.post('/create', (req, res) => {
         }
         else {
             res.header("Content-Type", 'application/json')
-            res.status(200).send({status: '200', classid: generatedID})
+            res.status(200).send({status: 200, classid: generatedID})
         }
     })
 })
 
-ClassController.post('/close/:classid', (req, res) => {
-    const { password } = req.body
+ClassController.post('/update/:classid', (req, res) => {
     const { classid } = req.params
+    const { password, status } = req.body
 
     var hashPassword = SHA256(password)
 
@@ -246,10 +246,44 @@ ClassController.post('/close/:classid', (req, res) => {
             res.status(500).send()
         }
         else {
-            res.header("Content-Type", 'application/json')
-            res.status(200).send({status: '200', classid: classid})
+            // console.log(results.length)
+            if (results.length) {
+                conn.query("UPDATE classroom_data set Class_Status = ? WHERE Class_ID = ?", [status, classid], (error, results, fields) => {
+                    if (error) {
+                        console.log(error)
+                        res.status(500).send()
+                    }
+                    else {
+                        res.header("Content-Type", 'application/json')
+                        res.status(200).send({status: 200, message: 'update success'})
+                    }
+                })
+            }
+            else {
+                res.header("Content-Type", 'application/json')
+                setTimeout((function() { res.status(200).send({status: 404, message: 'class not found or incorrect password'}) }), 500);
+            }
         }
     })
 })
+
+// ClassController.post('/close/:classid', (req, res) => {
+//     const { password } = req.body
+//     const { classid } = req.params
+
+//     var hashPassword = SHA256(password)
+
+//     conn.query("SELECT * from classroom_data WHERE Class_ID = ? and Class_Password = ?", [classid, hashPassword], (error, results, fields) => {
+//         if (error) {
+//             console.log(error)
+//             res.status(500).send()
+//         }
+//         else {
+//             res.header("Content-Type", 'application/json')
+//             res.status(200).send({status: '200', classid: classid})
+//         }
+//     })
+// })
+
 
 module.exports = ClassController;
