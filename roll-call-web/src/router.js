@@ -30,7 +30,7 @@ const router = new Router({
         {
           path: 'Create/1',
           name: 'Create_1',
-          component: () => import('@/components/Class/Create_1'),
+          component: () => import('@/components/class/Create_1'),
           meta: {
             title: 'สร้างห้องเรียน',
             requiredAuth: false,
@@ -40,7 +40,7 @@ const router = new Router({
         {
           path: 'Create/2',
           name: 'Create_2',
-          component: () => import('@/components/Class/Create_2'),
+          component: () => import('@/components/class/Create_2'),
           meta: {
             title: 'สร้างห้องเรียน',
             requiredAuth: false,
@@ -50,7 +50,7 @@ const router = new Router({
         {
           path: 'view/:classid',
           name: 'ViewClass',
-          component: () => import('@/components/Class/view'),
+          component: () => import('@/components/class/view'),
           meta: {
             title: 'ดูห้องเรียน',
             requiredAuth: false,
@@ -60,7 +60,7 @@ const router = new Router({
         {
           path: 'summary/:classid',
           name: 'ClassSummary',
-          component: () => import('@/components/Class/view/summary'),
+          component: () => import('@/components/class/view/summary'),
           meta: {
             title: 'สรุปห้องเรียน',
             requiredAuth: false,
@@ -70,7 +70,7 @@ const router = new Router({
         {
           path: 'all',
           name: 'AllClass',
-          component: () => import('@/components/Class/view/all'),
+          component: () => import('@/components/class/view/all'),
           meta: {
             title: 'ห้องเรียนทั้งหมด',
             requiredAuth: false,
