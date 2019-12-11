@@ -5,16 +5,6 @@ import App from './App'
 import router from './router.js'
 import BootstrapVue from 'bootstrap-vue'
 
-import {
-  library
-} from '@fortawesome/fontawesome-svg-core'
-import {
-  faUserSecret
-} from '@fortawesome/free-solid-svg-icons'
-import {
-  FontAwesomeIcon
-} from '@fortawesome/vue-fontawesome'
-
 // bootstrap
 import './assets/css/bootstrap/bootstrap.css'
 import './assets/css/bootstrap-vue/bootstrap-vue.css'
