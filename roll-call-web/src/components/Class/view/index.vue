@@ -27,7 +27,7 @@
                     <i class="fa fa-play"></i> เริ่มห้องเรียน
                   </button>
                   <button class="btn btn-warning" @click="sendUpdateClass(2)">
-                    <i class="fa fa-meh"></i> จับนักศึกษามาสาย
+                    <i class="fas fa-stopwatch"></i> จับนักศึกษามาสาย
                   </button>
                   <button class="btn btn-danger" @click="sendUpdateClass(3)">
                     <i class="fa fa-stop"></i> เลิกเรียน
@@ -73,9 +73,9 @@
                           />
                           <h4 class="text-sm-center mt-2 mb-1">{{ std.STD_Name + " " + std.STD_Lastname }}</h4>
                           <div class="location text-sm-left">
-                            <i class="fa fa-clock"></i> เวลาเข้าเรียน : {{ getDisplayDate(std.Attend_Time) }}
+                            <i class="fa fa-clock"></i> เวลาเข้าเรียน : {{ getDisplayDate(std.Attend_Time) }} น.
                             <br />
-                            <i class="fa fa-clock"></i> เวลาออก : <b v-if="std.Leave_Time">{{ getDisplayDate(std.Leave_Time) }}</b><b v-else>ยังไม่ออก</b>
+                            <i class="fa fa-clock"></i> เวลาออก : <b v-if="std.Leave_Time">{{ getDisplayDate(std.Leave_Time) }} น.</b><b v-else>ยังไม่ออก</b>
                             <br />
                             <i class="far fa-check-square"></i> สถานะ :
                             <button v-if="std.STD_Status == 0" class="btn btn-sm btn-danger">ออก</button>
