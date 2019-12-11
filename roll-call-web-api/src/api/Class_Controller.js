@@ -254,8 +254,26 @@ ClassController.post('/update/:classid', (req, res) => {
                         res.status(500).send()
                     }
                     else {
-                        res.header("Content-Type", 'application/json')
-                        res.status(200).send({status: 200, message: 'update success'})
+                        if (status == 4) { // ปิดห้อง
+                            conn.query("UPDATE classroom_std set STD_Status = 2 WHERE Class_ID = ? and STD_Status = 1", [classid], (error, results, fields) => {
+                                if (error) {
+                                    console.log(error)
+                                    res.status(500).send()
+                                }
+                                else {
+                                    io.emit('updateStd', {classID: classid})
+    
+                                    res.header("Content-Type", 'application/json')
+                                    res.status(200).send({status: 200, message: 'update success'})
+                                }
+                            })
+                        }
+                        else {
+                            io.emit('updateStd', {classID: classid})
+    
+                            res.header("Content-Type", 'application/json')
+                            res.status(200).send({status: 200, message: 'update success'})
+                        }
                     }
                 })
             }

@@ -30,7 +30,10 @@
                     <i class="fa fa-meh"></i> จับนักศึกษามาสาย
                   </button>
                   <button class="btn btn-danger" @click="sendUpdateClass(3)">
-                    <i class="fa fa-stop"></i> เลิกคลาส
+                    <i class="fa fa-stop"></i> เลิกเรียน
+                  </button>
+                  <button class="btn btn-secondary" @click="sendUpdateClass(4)">
+                    <i class="far fa-times-circle"></i> ปิดห้องเรียน
                   </button>
                   <!-- <button class="btn btn-danger float-right">
                     <i class="fa fa-trash"></i> ลบคลาส
@@ -71,6 +74,7 @@
                             <br />
                             <i class="far fa-check-square"></i> สถานะ :
                             <button v-if="std.STD_Status == 0" class="btn btn-sm btn-danger">ออก</button>
+                            <button v-else-if="std.STD_Status == 2" class="btn btn-sm btn-dark">โดด</button>
                             <button v-else-if="std.Attend_Status == 1" class="btn btn-sm btn-success">ปกติ</button>
                             <button v-else class="btn btn-sm btn-warning">สาย</button>
                           </div>
@@ -187,7 +191,10 @@ export default {
         text_status = 'ยืนยันที่จะจับนักศึกษามาสาย'
       }
       else if (updateToStatus == 3) {
-        text_status = 'ยืนยันที่จะเลิกคลาส (เปิดให้นักศึกษาลงชื่อออก)'
+        text_status = 'ยืนยันที่จะเลิกเรียน (เปิดให้นักศึกษาลงชื่อออก)'
+      }
+      else if (updateToStatus == 4) {
+        text_status = 'ยืนยันที่จะปิด (นักศึกษาที่ยังไม่ลงชื่อออก จะถูกลงว่าหนีการเรียน)'
       }
 
       Swal.fire({
