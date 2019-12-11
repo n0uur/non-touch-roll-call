@@ -8,9 +8,10 @@
  - Python 3.7
  - NodeJS
 	 - VueJS
+	 - ExpressJS
 	 - WebSocket
  - NFC
- - SQL
+ - Database (SQL)
  	 - MariaDB
 
 ### อ้างอิง
