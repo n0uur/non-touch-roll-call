@@ -22,7 +22,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12">
+                <div class="col-12" v-if="classData.Class_Status != 4">
                   <button class="btn btn-success" @click="sendUpdateClass(1)">
                     <i class="fa fa-play"></i> เริ่มห้องเรียน
                   </button>
@@ -38,6 +38,11 @@
                   <!-- <button class="btn btn-danger float-right">
                     <i class="fa fa-trash"></i> ลบคลาส
                   </button> -->
+                </div>
+                <div class="col-12" v-else>
+                  <button class="btn btn-success" @click="$router.push({path: '/class/summary/' + classID})">
+                    <i class="fas fa-clipboard-list"></i> สรุปห้องเรียน
+                  </button>
                 </div>
               </div>
             </div>
