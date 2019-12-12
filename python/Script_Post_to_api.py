@@ -35,10 +35,6 @@ def attend_class(classID, num_std_in_class):
     while True:
         cardID = input("Please tap the card:")
         if cardID.lower() == "end":
-            percentage = percentage_attending_class(
-                num_std_in_class, num_std_attend)
-            print(
-                "The number of students attending the class is %.2f percent of the total students." % percentage)
             terminate_program()
         num_std_attend += 1
         timestamp_utc = datetime.utcnow()  # UTC Timestamp
@@ -75,10 +71,10 @@ def recive_paramita(res):
         error()
 
 
-def percentage_attending_class(num_std_in_class, num_std_attend):
-    """The function calculates the student's attendance  as a percentage"""
-    percentage = (num_std_attend/num_std_in_class)*100
-    return percentage
+# def percentage_attending_class(num_std_in_class, num_std_attend):
+#     """The function calculates the student's attendance  as a percentage"""
+#     percentage = (num_std_attend/num_std_in_class)*100
+#     return percentage
 
 
 def terminate_program():
@@ -92,5 +88,4 @@ def error():
     winsound.Beep(2500, 750)
 
 
-start(input("Please fill in the classname:"), int(
-    input("Please enter the number of students:")))
+start(input("Please fill in the classname:"), 0)
