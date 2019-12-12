@@ -22,9 +22,9 @@
             <i class="fas fa-sign-out-alt"></i>
             หนีการเรียน: {{ studentSkipCount }}
           </button>
-          <button class="btn btn-success">
-            <i class="fas fa-download"></i>
-            ดาวน์โหลดสรุป CSV
+          <button class="btn btn-success float-md-right mt-2 mt-md-0" @click="exportXLSX">
+            <i class="fas fa-file-excel"></i>
+            ดาวน์โหลดสรุป Excel
           </button>
         </div>
       </div>
@@ -79,6 +79,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import Swal from 'sweetalert2'
+import XLSX from 'xlsx'
 
 export default {
   data () {
@@ -115,6 +116,23 @@ export default {
     this.updateClassData()
   },
   methods: {
+    exportXLSX() {
+      let stdTemp = []
+      this.studentList.forEach(std => {
+        stdTemp.push({
+          รหัสนักศึกษา: std.STD_ID,
+          ชื่อ: std.STD_Name,
+          นามสกุล: std.STD_Lastname,
+          เวลาเข้าเรียน: this.getXLSXDisplayDate(std.Attend_Time),
+          เวลาออก: this.getXLSXDisplayDate(std.Leave_Time),
+          สถานะ: this.getDisplayStatus(std.STD_Status, std.Attend_Status)
+        })
+      })
+      const dataWS = XLSX.utils.json_to_sheet(stdTemp)
+      const wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, dataWS)
+      XLSX.writeFile(wb,'ClassroomSummary-'+ this.classID +'-'+ new Date().toLocaleDateString("th-TH") +'.xlsx')
+    },
     getDisplayStatus (status, type) {
       if(status == 2)
         return 'หนีการเรียน'
@@ -129,6 +147,18 @@ export default {
         return dateTime.getHours() + ":" + dateTime.getMinutes() + ":" + dateTime.getSeconds()
       }
       return '-'
+    },
+    getXLSXDisplayDate(time) {
+        const options = {
+            weekday: "long",
+            year: "numeric",
+            month:"long",
+            day:"numeric",
+            hour:  "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        }
+        return new Date(time).toLocaleDateString("th-TH",options)
     },
     updateStdData () {
       let temp_list = []

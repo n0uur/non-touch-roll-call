@@ -26,7 +26,8 @@
     "vue-cookies": "^1.5.13",
     "vue-fontawesome": "^0.0.2",
     "vue-router": "^3.0.1",
-    "vuesax": "^3.10.5"
+    "vuesax": "^3.10.5",
+    "xlsx": "^0.15.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
