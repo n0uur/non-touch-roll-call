@@ -2,6 +2,7 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const https = require('https')
 const app = express()
 
 const PORT = 3000
@@ -32,7 +33,7 @@ app.use('/std', Student_Controller)
 
 // require('./src/api/Class_Controller')(app)
 
-var server = app.listen(PORT, function () {
+var server = https.createServer({}, app).listen(PORT, function () {
     console.log("API Listening on PORT: " + PORT)
 })
 
