@@ -17,6 +17,9 @@ app.disable('x-powered-by')
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*")
     res.header("Access-Control-Allow-Headers", "*")
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+    res.header("Pragma", "no-cache"); // HTTP 1.0.
+    res.header("Expires", "0"); // Proxies.
     next()
 })
 
