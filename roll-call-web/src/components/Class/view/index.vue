@@ -35,6 +35,9 @@
                   <button class="btn btn-secondary" @click="sendUpdateClass(4)">
                     <i class="far fa-times-circle"></i> ปิดห้องเรียน
                   </button>
+                  <button class="btn btn-primary float-none float-md-right" @click="$router.push({name: 'AllClass'})">
+                    <i class="fas fa-sign-out-alt"></i> กลับหน้ารวม
+                  </button>
                   <!-- <button class="btn btn-danger float-right">
                     <i class="fa fa-trash"></i> ลบคลาส
                   </button> -->
@@ -42,6 +45,9 @@
                 <div class="col-12" v-else>
                   <button class="btn btn-success" @click="$router.push({path: '/class/summary/' + classID})">
                     <i class="fas fa-clipboard-list"></i> สรุปห้องเรียน
+                  </button>
+                  <button class="btn btn-warning" @click="$router.push({name: 'AllClass'})">
+                    <i class="fas fa-sign-out-alt"></i> กลับหน้ารวม
                   </button>
                 </div>
               </div>
