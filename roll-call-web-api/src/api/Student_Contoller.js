@@ -53,7 +53,7 @@ StudentController.get('/getid/:stdid', (req, res) => {
 //     }
 // })
 
-StudentController.post('/register', (req, res) => {
+StudentController.post('/register/confirm', (req, res) => {
     const { cardid, studentid } = req.body
 
     // console.log(req.body)
@@ -80,6 +80,36 @@ StudentController.post('/register', (req, res) => {
             else {
                 res.header("Content-Type", 'application/json')
                 setTimeout((function() { res.status(200).send({status: 404, message: 'student id not found'}) }), 500);
+            }
+        }
+    })
+})
+
+StudentController.post('/register', (req, res) => {
+    const { stdID, stdName, stdLastname, stdNickname, stdImgURL  } = req.body
+
+    conn.query("SELECT * from student_data WHERE STD_ID = ?", [studentid], (error, results, fields) => {
+        if (error) {
+            console.log(error)
+            res.status(500).send()
+        }
+        else {
+            // console.log(results.length)
+            if (results.length == 0) {
+                conn.query("INSERT INTO student_data set STD_ID = ?, STD_Name = ?, STD_Lastname = ?, STD_Nickname = ?, STD_IMG_URL = ?", [stdID, stdName, stdLastname, stdNickname, stdImgURL], (error, results, fields) => {
+                    if (error) {
+                        console.log(error)
+                        res.status(500).send()
+                    }
+                    else {
+                        res.header("Content-Type", 'application/json')
+                        res.status(200).send({status: 200, message: 'register success'})
+                    }
+                })
+            }
+            else {
+                res.header("Content-Type", 'application/json')
+                setTimeout((function() { res.status(200).send({status: 400, message: 'student already exists'}) }), 500);
             }
         }
     })
