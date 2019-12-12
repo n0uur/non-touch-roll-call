@@ -1,5 +1,4 @@
 # NON-TOUCH ROLL-CALL | KMITL PSIT 2019
-## *อยู่ระหว่างจัดทำ*
 
 ### รายละเอียด
 > *รอการอัปเดต*
@@ -19,6 +18,12 @@
  - [Websocket with VueJS](https://www.npmjs.com/package/vue-native-websocket)
  - [Python 3.7](https://docs.python.org/3.7/)
  - [Bootstrap](https://bootstrap-vue.js.org/)
+
+### วิดิโอนำเสนอโปรเจค
+> *รอการอัปเดต*
+
+### รูปภาพตัวอย่าง
+> *รอการอัปเดต*
 
 ### ประโยชน์ที่คาดว่าจะได้รับ
  - ได้ฝึกฝนทักษะและกระบวนการทำงานเป็นกลุ่ม
