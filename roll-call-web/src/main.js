@@ -20,17 +20,12 @@ import './assets/vendor/slick/slick.css'
 import './assets/vendor/select2/select2.min.css'
 import './assets/vendor/perfect-scrollbar/perfect-scrollbar.css'
 import './assets/css/theme.css'
-// page script
-// import './assets/js/main.js'
 
 Vue.config.productionTip = false
-// Vue.config.silent = true
 Vue.use(BootstrapVue)
-// Vue.use(vue-jquery)
 
 Vue.prototype.$api_ip = 'http://103.253.72.94:3000'
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

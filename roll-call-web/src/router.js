@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import NProgress from 'nprogress'
-// import Cookies from 'js-cookie'
 
 Vue.use(Router)
 
@@ -95,49 +94,6 @@ const router = new Router({
       }
     },
     {
-      path: '/Auth',
-      name: 'Auth',
-      mode: 'history',
-      component: () => import('@/components/Auth'),
-      children: [
-        {
-          path: 'Login',
-          name: 'Login',
-          component: () => import('@/components/Auth/Login'),
-          meta: {
-            title: 'เข้าสู่ระบบ',
-            requiredAuth: false,
-            PreventAuth: true
-          }
-        },
-        {
-          path: 'Register',
-          name: 'Register',
-          component: () => import('@/components/Auth/Register'),
-          meta: {
-            title: 'สมัครสมาชิก',
-            requiredAuth: false,
-            PreventAuth: true
-          }
-        },
-        {
-          path: '*',
-          name: 'Page Not found',
-          component: () => import('@/components/404'),
-          meta: {
-            title: 'ERROR 404',
-            requiredAuth: false,
-            PreventAuth: false
-          }
-        }
-      ],
-      meta: {
-        title: 'รับรองบัญชี',
-        requiredAuth: false,
-        PreventAuth: true
-      }
-    },
-    {
       path: '/stdregister',
       name: 'registerStudent',
       mode: 'history',
@@ -180,3 +136,51 @@ router.afterEach((to, from) => {
 })
 
 export default router
+
+
+///////////////////////////////////////////////////////
+///////////////////// NOT USING ///////////////////////
+///////////////////////////////////////////////////////
+// {
+//   path: '/Auth',
+//   name: 'Auth',
+//   mode: 'history',
+//   component: () => import('@/components/Auth'),
+//   children: [
+//     {
+//       path: 'Login',
+//       name: 'Login',
+//       component: () => import('@/components/Auth/Login'),
+//       meta: {
+//         title: 'เข้าสู่ระบบ',
+//         requiredAuth: false,
+//         PreventAuth: true
+//       }
+//     },
+//     {
+//       path: 'Register',
+//       name: 'Register',
+//       component: () => import('@/components/Auth/Register'),
+//       meta: {
+//         title: 'สมัครสมาชิก',
+//         requiredAuth: false,
+//         PreventAuth: true
+//       }
+//     },
+//     {
+//       path: '*',
+//       name: 'Page Not found',
+//       component: () => import('@/components/404'),
+//       meta: {
+//         title: 'ERROR 404',
+//         requiredAuth: false,
+//         PreventAuth: false
+//       }
+//     }
+//   ],
+//   meta: {
+//     title: 'รับรองบัญชี',
+//     requiredAuth: false,
+//     PreventAuth: true
+//   }
+// },

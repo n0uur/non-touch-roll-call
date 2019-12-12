@@ -39,9 +39,7 @@
                 <th>
                   <i class="fas fa-user"></i> ชื่อ
                 </th>
-                <th>
-                  นามสกุล
-                </th>
+                <th>นามสกุล</th>
                 <th>
                   <i class="far fa-clock"></i> เวลาเข้าเรียน
                 </th>
@@ -68,7 +66,9 @@
       </div>
       <div class="row mt-3 mb-3 border-top border-1 pt-3">
         <div class="col-12 mb-3">
-          <router-link class="btn btn-warning btn-block" :to="{ name: 'AllClass'} "><i class="fas fa-sign-out-alt"></i> กลับหน้ารวมห้องเรียน</router-link>
+          <router-link class="btn btn-warning btn-block" :to="{ name: 'AllClass'} ">
+            <i class="fas fa-sign-out-alt"></i> กลับหน้ารวมห้องเรียน
+          </router-link>
         </div>
       </div>
     </div>
@@ -76,48 +76,46 @@
 </template>
 
 <script>
-import axios from 'axios'
-import _ from 'lodash'
-import Swal from 'sweetalert2'
-import XLSX from 'xlsx'
+import axios from "axios";
+import _ from "lodash";
+import Swal from "sweetalert2";
+import XLSX from "xlsx";
 
 export default {
-  data () {
+  data() {
     return {
       classID: this.$route.params.classid,
       classData: [],
       studentRaw: [],
       studentInfo: []
-    }
+    };
   },
   computed: {
-    studentList () {
-      return _.orderBy(this.studentRaw, ['STD_ID'])
+    studentList() {
+      return _.orderBy(this.studentRaw, ["STD_ID"]);
     },
-    studentSkipCount () {
-      let count = 0
+    studentSkipCount() {
+      let count = 0;
       this.studentRaw.forEach(e => {
-        if (e.STD_Status == 2)
-          count += 1
-      })
-      return count
+        if (e.STD_Status == 2) count += 1;
+      });
+      return count;
     },
     studentLateCount() {
-      let count = 0
+      let count = 0;
       this.studentRaw.forEach(e => {
-        if (e.Attend_Status == 2)
-          count += 1
-      })
-      return count
+        if (e.Attend_Status == 2) count += 1;
+      });
+      return count;
     }
   },
   mounted() {
-    this.updateStdData()
-    this.updateClassData()
+    this.updateStdData();
+    this.updateClassData();
   },
   methods: {
     exportXLSX() {
-      let stdTemp = []
+      let stdTemp = [];
       this.studentList.forEach(std => {
         stdTemp.push({
           รหัสนักศึกษา: std.STD_ID,
@@ -126,67 +124,80 @@ export default {
           เวลาเข้าเรียน: this.getXLSXDisplayDate(std.Attend_Time),
           เวลาออก: this.getXLSXDisplayDate(std.Leave_Time),
           สถานะ: this.getDisplayStatus(std.STD_Status, std.Attend_Status)
-        })
-      })
-      const dataWS = XLSX.utils.json_to_sheet(stdTemp)
-      const wb = XLSX.utils.book_new()
-      XLSX.utils.book_append_sheet(wb, dataWS)
-      XLSX.writeFile(wb,'ClassroomSummary-'+ this.classID +'-'+ new Date().toLocaleDateString("th-TH") +'.xlsx')
+        });
+      });
+      const dataWS = XLSX.utils.json_to_sheet(stdTemp);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, dataWS);
+      XLSX.writeFile(
+        wb,
+        "ClassroomSummary-" +
+          this.classID +
+          "-" +
+          new Date().toLocaleDateString("th-TH") +
+          ".xlsx"
+      );
     },
-    getDisplayStatus (status, type) {
-      if(status == 2)
-        return 'หนีการเรียน'
-      else if(status == 0 && type == 1)
-        return 'ปกติ'
-      else
-        return 'สาย'
+    getDisplayStatus(status, type) {
+      if (status == 2) return "หนีการเรียน";
+      else if (status == 0 && type == 1) return "ปกติ";
+      else return "สาย";
     },
     getDisplayDate(time) {
-      if(time) {
-        let dateTime = new Date(time)
-        return dateTime.getHours() + ":" + dateTime.getMinutes() + ":" + dateTime.getSeconds()
+      if (time) {
+        let dateTime = new Date(time);
+        return (
+          dateTime.getHours() +
+          ":" +
+          dateTime.getMinutes() +
+          ":" +
+          dateTime.getSeconds()
+        );
       }
-      return '-'
+      return "-";
     },
     getXLSXDisplayDate(time) {
-        const options = {
-            weekday: "long",
-            year: "numeric",
-            month:"long",
-            day:"numeric",
-            hour:  "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-        }
-        return new Date(time).toLocaleDateString("th-TH",options)
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      };
+      return new Date(time).toLocaleDateString("th-TH", options);
     },
-    updateStdData () {
-      let temp_list = []
+    updateStdData() {
+      let temp_list = [];
       axios({
         method: "GET",
         url: this.$api_ip + "/class/getstd/" + this.classID,
         data: []
       })
-      .then((res) => {
-        res.data.forEach(e => {
-          axios({
-            method: "GET",
-            url: this.$api_ip + "/std/getid/" + e.STD_ID,
-            data: []
-          })
-          .then((res) => {
-            temp_list.push(Object.assign({}, e, res.data, {attend_timestamp: new Date(e.Attend_Time).getTime()}))
-          })
-          .catch((err) => {
-            console.log(err)
+        .then(res => {
+          res.data.forEach(e => {
+            axios({
+              method: "GET",
+              url: this.$api_ip + "/std/getid/" + e.STD_ID,
+              data: []
+            })
+              .then(res => {
+                temp_list.push(
+                  Object.assign({}, e, res.data, {
+                    attend_timestamp: new Date(e.Attend_Time).getTime()
+                  })
+                );
+              })
+              .catch(err => {
+                console.log(err);
+              });
           });
+          this.studentRaw = temp_list;
         })
-        this.studentRaw = temp_list
-        
-      })
-      .catch((err) => {
-        console.log(err)
-      });
+        .catch(err => {
+          console.log(err);
+        });
     },
     updateClassData() {
       axios({
@@ -194,34 +205,26 @@ export default {
         url: this.$api_ip + "/class/get/" + this.classID,
         data: []
       })
-      .then((res) => {
-        if (res.data.status == 404) {
-          Swal.fire(
-              'ข้อผิดพลาด',
-              'ไม่พบห้องเรียนที่ร้องขอ',
-              'error'
-            ).then (e => {
-              this.$router.push({name: 'AllClass'})
-          })
-        }
-        else if (res.data.Class_Status != 4) {
-          Swal.fire(
-              'ข้อผิดพลาด',
-              'ห้องเรียนยังไม่ปิด',
-              'error'
-            ).then (e => {
-              this.$router.push({path: '/class/view/' + this.classID})
-          })
-        }
-        else {
-          this.classData = res.data
-          // console.log(res.data.Class_Status)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      });
-    },
+        .then(res => {
+          if (res.data.status == 404) {
+            Swal.fire("ข้อผิดพลาด", "ไม่พบห้องเรียนที่ร้องขอ", "error").then(
+              e => {
+                this.$router.push({ name: "AllClass" });
+              }
+            );
+          } else if (res.data.Class_Status != 4) {
+            Swal.fire("ข้อผิดพลาด", "ห้องเรียนยังไม่ปิด", "error").then(e => {
+              this.$router.push({ path: "/class/view/" + this.classID });
+            });
+          } else {
+            this.classData = res.data;
+            // console.log(res.data.Class_Status)
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
 </script>
