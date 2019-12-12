@@ -24,7 +24,6 @@ const router = new Router({
       name: 'Class',
       mode: 'history',
       redirect: { name: 'AllClass' },
-      component: () => import('@/components/Auth'),
       children: [
         {
           path: 'Create/1',
