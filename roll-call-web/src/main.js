@@ -28,6 +28,8 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 // Vue.use(vue-jquery)
 
+Vue.prototype.$api_ip = 'https://rollcall-api.ktnis.me'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

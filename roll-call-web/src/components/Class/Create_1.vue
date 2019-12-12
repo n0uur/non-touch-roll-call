@@ -67,7 +67,7 @@ export default {
                     if (this.classForm.instructor != '' && this.classForm.subject != '' && this.classForm.password != '') {
                         axios({
                             method: "POST",
-                            url: "http://192.168.1.41:3000/class/create",
+                            url: this.$api_ip + "/class/create",
                             data: this.classForm
                         })
                         .then((res) => {

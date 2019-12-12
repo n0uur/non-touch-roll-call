@@ -70,13 +70,13 @@ export default {
             let temp_class = []
             axios({
                 method: "GET",
-                url: "http://192.168.1.41:3000/class/getall"
+                url: this.$api_ip + "/class/getall"
             })
             .then((res) => {
                 res.data.forEach(e => {
                     axios({
                         method: "GET",
-                        url: "http://192.168.1.41:3000/class/stdcount/" + e.Class_ID,
+                        url: this.$api_ip + "/class/stdcount/" + e.Class_ID,
                     })
                     .then((respond) => {
                         temp_class.push(Object.assign({}, e, {studentCount:respond.data.count}, {create_timestamp: new Date(e.CreatedTime).getTime()}))

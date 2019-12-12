@@ -123,7 +123,7 @@ export default {
       classData: [],
       studentRaw: [],
       studentInfo: [],
-      classSocket: io("192.168.1.41:3010")
+      classSocket: io("103.253.72.94:3010")
     };
   },
   computed: {
@@ -136,14 +136,14 @@ export default {
       let temp_list = []
       axios({
         method: "GET",
-        url: "http://192.168.1.41:3000/class/getstd/" + this.classID,
+        url: this.$api_ip + "/class/getstd/" + this.classID,
         data: []
       })
       .then((res) => {
         res.data.forEach(e => {
           axios({
             method: "GET",
-            url: "http://192.168.1.41:3000/std/getid/" + e.STD_ID,
+            url: this.$api_ip + "/std/getid/" + e.STD_ID,
             data: []
           })
           .then((res) => {
@@ -164,7 +164,7 @@ export default {
     updateClassData() {
       axios({
         method: "GET",
-        url: "http://192.168.1.41:3000/class/get/" + this.classID,
+        url: this.$api_ip + "/class/get/" + this.classID,
         data: []
       })
       .then((res) => {
@@ -217,7 +217,7 @@ export default {
         preConfirm: (login) => {
           return axios({
             method: "POST",
-            url: "http://192.168.1.41:3000/class/update/" + this.classID,
+            url: this.$api_ip + "/class/update/" + this.classID,
             data: {
               password: login,
               status: updateToStatus
