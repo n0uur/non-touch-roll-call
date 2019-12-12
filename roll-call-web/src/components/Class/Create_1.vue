@@ -26,7 +26,8 @@
                                         <input class="au-input au-input--full" v-model="classForm.password" type="password" placeholder="รหัสผ่านห้องเรียน">
                                     </div>
                                 </form>
-                                <button class="btn-block btn btn-info m-b-20 btn-md" @click="nextPage()">สร้างห้องเรียน</button>
+                                <button class="btn-block btn btn-info btn-md" @click="nextPage()">สร้างห้องเรียน</button>
+                                <button class="btn-block btn btn-warning m-b-20 btn-md" @click="$router.push({name: 'AllClass'})">กลับ</button>
                             </div>
                         </div>
                     </div>
