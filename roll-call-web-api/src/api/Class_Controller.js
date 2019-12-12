@@ -151,7 +151,7 @@ ClassController.post('/scan', (req, res) => {
                                     })
                                 }
                                 else if (results[0]['Class_Status'] == 2) { // ห้องเรียนกำลังเรียน มาสาย
-                                    conn.query("SELECT COUNT(*), STD_ID from classroom_std WHERE STD_ID = ?", [tmp_stdid], (error5, results5, fields5) => {
+                                    conn.query("SELECT COUNT(*), STD_ID from classroom_std WHERE STD_ID = ? and Class_ID = ?", [tmp_stdid, classid], (error5, results5, fields5) => {
                                         if (error5) {
                                             console.log(error2)
                                             res.status(500).send()
