@@ -13,7 +13,7 @@ const router = new Router({
       path: '/',
       name: 'index',
       mode: 'history',
-      component: () => import('@/components/index'),
+      redirect: { name: 'AllClass' },
       meta: {
         title: 'หน้าแรก',
         requiredAuth: true,
