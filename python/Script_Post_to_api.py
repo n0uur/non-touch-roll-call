@@ -49,14 +49,14 @@ def attend_class(classID, num_std_in_class):
 def attend_api_post(classID, cardID, timestamp):
     """Function to send student attendance API data to the web and receive data from the website"""
     param = {"classid": classID, "cardid": cardID, "Timestamp": timestamp}
-    res = requests.post("http://103.253.72.94:3000/class/scan", params=param)
+    res = requests.post("http://103.253.72.94:3000/class/scan", json=param)
     recive_paramita(res)
 
 
 def stdreg_api_post(cardID, studentID):
     """This function is use for send the registration API data and receive data from the website."""
     param = {"cardid": cardID, "studentid": studentID}
-    res = requests.post("http://103.253.72.94:3000/std/register", params=param)
+    res = requests.post("http://103.253.72.94:3000/std/register", json=param)
     recive_paramita(res)
 
 
