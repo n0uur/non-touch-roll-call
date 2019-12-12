@@ -138,12 +138,12 @@ const router = new Router({
       }
     },
     {
-      path: '/Home',
-      name: 'Home',
+      path: '/stdregister',
+      name: 'registerStudent',
       mode: 'history',
-      component: () => import('@/components/Home'),
+      component: () => import('@/components/stdreg'),
       meta: {
-        title: 'หน้าหลัก',
+        title: 'ลงทะเบียนนักศึกษา',
         requiredAuth: true,
         PreventAuth: false
       }

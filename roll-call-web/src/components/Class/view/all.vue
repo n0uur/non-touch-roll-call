@@ -3,7 +3,7 @@
         <div class="container bg-light mt-3">
             <div class="row mt-3 mb-3">
                 <div class="col mt-2">
-                    <h3><i class="fas fa-users"></i> หน้ารวมห้องเรียน <i @click="getAllClass()" class="fas fa-redo-alt text-primary hover-trans" style="font-size: 15px"></i> 
+                    <h3><i class="fas fa-users" @click="$router.push({name: 'registerStudent'})"></i> หน้ารวมห้องเรียน <i @click="getAllClass()" class="fas fa-redo-alt text-primary hover-trans" style="font-size: 15px"></i> 
                     <div class="text-right"><button class="btn btn-success" @click="$router.push({ name: 'Create_1'})"><i class="fas fa-plus"></i> สร้างห้องเรียน</button></div>
                     </h3>
                 </div>
