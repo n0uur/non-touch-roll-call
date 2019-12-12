@@ -56,7 +56,7 @@ def attend_api_post(classID, cardID, timestamp):
 def stdreg_api_post(cardID, studentID):
     """This function is use for send the registration API data and receive data from the website."""
     param = {"cardid": cardID, "studentid": studentID}
-    res = requests.post("http://103.253.72.94:3000/std/register", json=param)
+    res = requests.post("http://103.253.72.94:3000/std/register/confirm", json=param)
     recive_paramita(res)
 
 
