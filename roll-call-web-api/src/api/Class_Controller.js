@@ -52,53 +52,66 @@ function SHA256(paintext) {
 // }
 
 ClassController.get('/get/:classid', (req, res) => {
-    const { classid } = req.params
+    try {
+        const { classid } = req.params
 
-    conn.query("SELECT * from classroom_data WHERE Class_ID = ?", [classid], (error, results, fields) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send()
-        }
-        else {
-            res.header("Content-Type", 'application/json')
-            if (results.length > 0) {
-                res.status(200).send(JSON.stringify(Object.assign({}, {status: 200}, results[0]) , null, 2))
+        conn.query("SELECT * from classroom_data WHERE Class_ID = ?", [classid], (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send()
             }
             else {
-                res.status(200).send(JSON.stringify({status: 404}, null, 2))
+                res.header("Content-Type", 'application/json')
+                if (results.length > 0) {
+                    res.status(200).send(JSON.stringify(Object.assign({}, {status: 200}, results[0]) , null, 2))
+                }
+                else {
+                    res.status(200).send(JSON.stringify({status: 404}, null, 2))
+                }
             }
-        }
-    })
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
 })
 
 ClassController.get('/getstd/:classid', (req, res) => {
-    const { classid } = req.params
-    
-    conn.query("SELECT * from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send()
-        }
-        else {
-            res.header("Content-Type", 'application/json')
-            res.status(200).send(JSON.stringify(results, null, 2))
-        }
-    })
+    try {
+        const { classid } = req.params
+        
+        conn.query("SELECT * from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send()
+            }
+            else {
+                res.header("Content-Type", 'application/json')
+                res.status(200).send(JSON.stringify(results, null, 2))
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
 })
 
 ClassController.get('/getall', (req, res) => {
-    const { classid } = req.params
-
-    conn.query("SELECT * from classroom_data", (error, results, fields) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send()
-        }
-        else {
-            res.header("Content-Type", 'application/json')
-            res.status(200).send(JSON.stringify(results, null, 2))
-        }
-    })
+    try {
+        conn.query("SELECT * from classroom_data", (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send()
+            }
+            else {
+                res.header("Content-Type", 'application/json')
+                res.status(200).send(JSON.stringify(results, null, 2))
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
 })
 
 ClassController.post('/scan', (req, res) => {
@@ -215,89 +228,104 @@ ClassController.post('/scan', (req, res) => {
 })
 
 ClassController.post('/create', (req, res) => {
-    const { subject, instructor, password } = req.body
+    try {
+        const { subject, instructor, password } = req.body
 
-    var generatedID = Math.floor(Math.random() * 90000) + 10000
-    var hashPassword = SHA256(password)
+        var generatedID = Math.floor(Math.random() * 90000) + 10000
+        var hashPassword = SHA256(password)
 
-    console.log("\x1b[41mCreated Classroom: " + generatedID, subject, instructor + "\x1b[0m")
+        console.log("\x1b[41mCreated Classroom: " + generatedID, subject, instructor + "\x1b[0m")
 
-    conn.query("INSERT INTO classroom_data (Class_ID, Class_Subject, Class_Instructor, Class_Password) VALUE (?, ?, ?, ?)", [generatedID, subject, instructor, hashPassword], (error, results, fields) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send()
-        }
-        else {
-            res.header("Content-Type", 'application/json')
-            res.status(200).send({status: 200, classid: generatedID})
-        }
-    })
-})
-
-ClassController.post('/update/:classid', (req, res) => {
-    const { classid } = req.params
-    const { password, status } = req.body
-
-    var hashPassword = SHA256(password)
-
-    conn.query("SELECT * from classroom_data WHERE Class_ID = ? and Class_Password = ?", [classid, hashPassword], (error, results, fields) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send()
-        }
-        else {
-            // console.log(results.length)
-            if (results.length) {
-                conn.query("UPDATE classroom_data set Class_Status = ? WHERE Class_ID = ?", [status, classid], (error, results, fields) => {
-                    if (error) {
-                        console.log(error)
-                        res.status(500).send()
-                    }
-                    else {
-                        if (status == 4) { // ปิดห้อง
-                            conn.query("UPDATE classroom_std set STD_Status = 2 WHERE Class_ID = ? and STD_Status = 1", [classid], (error, results, fields) => {
-                                if (error) {
-                                    console.log(error)
-                                    res.status(500).send()
-                                }
-                                else {
-                                    io.emit('updateStd', {classID: classid})
-    
-                                    res.header("Content-Type", 'application/json')
-                                    res.status(200).send({status: 200, message: 'update success'})
-                                }
-                            })
-                        }
-                        else {
-                            io.emit('updateStd', {classID: classid})
-    
-                            res.header("Content-Type", 'application/json')
-                            res.status(200).send({status: 200, message: 'update success'})
-                        }
-                    }
-                })
+        conn.query("INSERT INTO classroom_data (Class_ID, Class_Subject, Class_Instructor, Class_Password) VALUE (?, ?, ?, ?)", [generatedID, subject, instructor, hashPassword], (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send()
             }
             else {
                 res.header("Content-Type", 'application/json')
-                setTimeout((function() { res.status(200).send({status: 404, message: 'class not found or incorrect password'}) }), 500);
+                res.status(200).send({status: 200, classid: generatedID})
             }
-        }
-    })
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
+})
+
+ClassController.post('/update/:classid', (req, res) => {
+    try {
+        const { classid } = req.params
+        const { password, status } = req.body
+
+        var hashPassword = SHA256(password)
+
+        conn.query("SELECT * from classroom_data WHERE Class_ID = ? and Class_Password = ?", [classid, hashPassword], (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send()
+            }
+            else {
+                // console.log(results.length)
+                if (results.length) {
+                    conn.query("UPDATE classroom_data set Class_Status = ? WHERE Class_ID = ?", [status, classid], (error, results, fields) => {
+                        if (error) {
+                            console.log(error)
+                            res.status(500).send()
+                        }
+                        else {
+                            if (status == 4) { // ปิดห้อง
+                                conn.query("UPDATE classroom_std set STD_Status = 2 WHERE Class_ID = ? and STD_Status = 1", [classid], (error, results, fields) => {
+                                    if (error) {
+                                        console.log(error)
+                                        res.status(500).send()
+                                    }
+                                    else {
+                                        io.emit('updateStd', {classID: classid})
+        
+                                        res.header("Content-Type", 'application/json')
+                                        res.status(200).send({status: 200, message: 'update success'})
+                                    }
+                                })
+                            }
+                            else {
+                                io.emit('updateStd', {classID: classid})
+        
+                                res.header("Content-Type", 'application/json')
+                                res.status(200).send({status: 200, message: 'update success'})
+                            }
+                        }
+                    })
+                }
+                else {
+                    res.header("Content-Type", 'application/json')
+                    setTimeout((function() { res.status(200).send({status: 404, message: 'class not found or incorrect password'}) }), 500);
+                }
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
 })
 
 ClassController.get('/stdcount/:classid', (req, res) => {
-    const { classid } = req.params
+    try {
+        const { classid } = req.params
 
-    conn.query("SELECT COUNT(*) from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
-        if (error) {
-            console.log(error)
-            res.status(500).send()
-        }
-        else {
-            res.header("Content-Type", 'application/json')
-            res.status(200).send({count: results[0]['COUNT(*)']})
-        }
-    })
+        conn.query("SELECT COUNT(*) from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
+            if (error) {
+                console.log(error)
+                res.status(500).send()
+            }
+            else {
+                res.header("Content-Type", 'application/json')
+                res.status(200).send({count: results[0]['COUNT(*)']})
+            }
+        })
+    }
+    catch (e) {
+        console.log(e)
+    }
 })
 
 // ClassController.post('/close/:classid', (req, res) => {
