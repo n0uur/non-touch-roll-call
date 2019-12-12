@@ -48,15 +48,15 @@ def attend_class(classID, num_std_in_class):
 
 def attend_api_post(classID, cardID, timestamp):
     """Function to send student attendance API data to the web and receive data from the website"""
-    param = {"ClassID": classID, "CardID": cardID, "Timestamp": timestamp}
-    res = requests.post("https://api-t2o.ktnis.me", params=param)
+    param = {"classid": classID, "cardid": cardID, "Timestamp": timestamp}
+    res = requests.post("http://103.253.72.94:3000/class/scan", params=param)
     recive_paramita(res)
 
 
 def stdreg_api_post(cardID, studentID):
     """This function is use for send the registration API data and receive data from the website."""
-    param = {"CardID": cardID, "StudentID": studentID}
-    res = requests.post("https://api-t2o.ktnis.me", params=param)
+    param = {"cardid": cardID, "studentid": studentID}
+    res = requests.post("http://103.253.72.94:3000/std/register", params=param)
     recive_paramita(res)
 
 
@@ -69,6 +69,7 @@ def recive_paramita(res):
             winsound.Beep(2500, 350)
     else:
         error()
+        print(res.text)
 
 
 # def percentage_attending_class(num_std_in_class, num_std_attend):
