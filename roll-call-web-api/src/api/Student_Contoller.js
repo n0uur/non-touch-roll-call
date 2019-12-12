@@ -88,7 +88,7 @@ StudentController.post('/register/confirm', (req, res) => {
 StudentController.post('/register', (req, res) => {
     const { stdID, stdName, stdLastname, stdNickname, stdImgURL  } = req.body
 
-    conn.query("SELECT * from student_data WHERE STD_ID = ?", [studentid], (error, results, fields) => {
+    conn.query("SELECT * from student_data WHERE STD_ID = ?", [stdID], (error, results, fields) => {
         if (error) {
             console.log(error)
             res.status(500).send()
