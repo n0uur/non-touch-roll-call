@@ -7,9 +7,8 @@ const crypto = require('crypto')
 
 const bodyParser = require('body-parser')
 const app = express()
-const https = require('https')
 
-var server = https.createServer({}, app).listen(3010, function () {
+var server = app.listen(3010, function () {
     console.log("WebSocket (Classroom) on PORT: " + 3010)
 })
 
