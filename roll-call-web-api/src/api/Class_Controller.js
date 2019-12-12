@@ -285,6 +285,21 @@ ClassController.post('/update/:classid', (req, res) => {
     })
 })
 
+ClassController.get('/stdcount/:classid', (req, res) => {
+    const { classid } = req.params
+
+    conn.query("SELECT COUNT(*) from classroom_std WHERE Class_ID = ?", [classid], (error, results, fields) => {
+        if (error) {
+            console.log(error)
+            res.status(500).send()
+        }
+        else {
+            res.header("Content-Type", 'application/json')
+            res.status(200).send({count: results[0]['COUNT(*)']})
+        }
+    })
+})
+
 // ClassController.post('/close/:classid', (req, res) => {
 //     const { password } = req.body
 //     const { classid } = req.params
