@@ -143,3 +143,34 @@ export default {
   }
 };
 </script>
+
+<style>
+
+#upload_btn {
+  padding: 10px;
+  color: white;
+  background-color: #4272d7;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  
+#upload_btn:hover {
+  background-color: #3868cd;
+}
+
+#status_text {
+  margin-left: 10px;
+  color: #aaa;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+</style>
