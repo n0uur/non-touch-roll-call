@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                   <div class="overview-wrap mb-2">
                     <h2 class="title-1">
-                      จัดการห้องเรียน วิชา {{ classData.Class_Subject + ' โดย ' + classData.Class_Instructor }}
+                      จัดการห้องเรียน <b class="text-danger">{{ classID }}</b> วิชา {{ classData.Class_Subject + ' โดย ' + classData.Class_Instructor }}
                       [สถานะ :
                       <button
                         v-if="classData.Class_Status == 0"
