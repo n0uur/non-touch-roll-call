@@ -44,6 +44,11 @@
  - NFC
  - Database (SQL)
  	 - MariaDB
+
+
+#### เครื่องอ่าน NFC ที่เราใช้
+![NFC_READER](https://user-images.githubusercontent.com/50010805/70907979-c4cb3600-203c-11ea-951e-5b82bc800623.jpg)
+
 	 
 <hr>
 
@@ -56,7 +61,7 @@
 <hr>
 
 ### วิดิโอนำเสนอโปรเจค
-> *รอการอัปเดต*
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/JXB6ZKydH8A/0.jpg)](https://www.youtube.com/watch?v=JXB6ZKydH8A)
 
 <hr>
 
