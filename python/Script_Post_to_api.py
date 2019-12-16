@@ -47,13 +47,14 @@ def attend_class(classID, num_std_in_class):
 
 
 def attend_api_post(classID, cardID, timestamp):
-    """Function to send student attendance API data to the web and receive data from the website"""
+    """Function to send student attendance API data to the web"""
     param = {"classid": classID, "cardid": cardID, "Timestamp": timestamp}
     res = requests.post("http://103.253.72.94:3000/class/scan", json=param)
     recive_paramita(res)
 
 
 def stdreg_api_post(cardID, studentID):
+    """Function to send พegistration information API data to the web"""
     """This function is use for send the registration API data and receive data from the website."""
     param = {"cardid": cardID, "studentid": studentID}
     res = requests.post("http://103.253.72.94:3000/std/register/confirm", json=param)
@@ -79,6 +80,7 @@ def recive_paramita(res):
 
 
 def terminate_program():
+    """terminte program"""
     """This function is used to theminate the program"""
     sys.exit()
 
