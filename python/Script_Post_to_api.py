@@ -1,4 +1,5 @@
-"""Script_Post_to_api"""
+"""NON-TOUCH-ROLL-CALL
+Student's Card Scanner"""
 import winsound
 import requests
 import calendar
@@ -8,7 +9,9 @@ from datetime import datetime
 
 
 def start(classID, num_std_in_class):
-    """Function to start the system by scanning to attend class"""
+    """get classid and select mode from classid
+    goto student card confirmation if classid is 'stdreg'
+    goto attending classroom if not"""
     if classID == "stdreg":
         stdreg()
     else:
@@ -16,7 +19,7 @@ def start(classID, num_std_in_class):
 
 
 def stdreg():
-    """This function is used for registration. By student ID and student ID"""
+    """get student card infomation and student id and send to API for confirming registration"""
     while True:
         cardID = input("Please tap the card:")
         if cardID.lower() == "end":
@@ -30,7 +33,7 @@ def stdreg():
 
 
 def attend_class(classID, num_std_in_class):
-    """Functions for using student card scanning To attend class"""
+    """get student card infomation and send to API for attendance class"""
     num_std_attend = 0
     while True:
         cardID = input("Please tap the card:")
@@ -47,22 +50,21 @@ def attend_class(classID, num_std_in_class):
 
 
 def attend_api_post(classID, cardID, timestamp):
-    """Function to send student attendance API data to the web"""
+    """student attending details to API"""
     param = {"classid": classID, "cardid": cardID, "Timestamp": timestamp}
     res = requests.post("http://103.253.72.94:3000/class/scan", json=param)
     recive_paramita(res)
 
 
 def stdreg_api_post(cardID, studentID):
-    """Function to send พegistration information API data to the web"""
-    """This function is use for send the registration API data and receive data from the website."""
+    """send registration details to API"""
     param = {"cardid": cardID, "studentid": studentID}
     res = requests.post("http://103.253.72.94:3000/std/register/confirm", json=param)
     recive_paramita(res)
 
 
 def recive_paramita(res):
-    """Function for status notifications"""
+    """play sound and print status of respond"""
     if json.loads(res.text).get('status', 404) == 200:
         now = datetime.now()
         print("Success", now.strftime("%Y-%m-%d %H:%M:%S"))
@@ -80,8 +82,8 @@ def recive_paramita(res):
 
 
 def terminate_program():
-    """terminte program"""
-    """This function is used to theminate the program"""
+    """program will stop when call this function
+    """
     sys.exit()
 
 
