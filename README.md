@@ -65,7 +65,7 @@
 <hr>
 
 ### วิดิโอนำเสนอโปรเจค
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/JXB6ZKydH8A/0.jpg)](https://www.youtube.com/watch?v=JXB6ZKydH8A)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/JXB6ZKydH8A/0.jpg)](https://www.youtube.com/watch?v=Dj7S_zK-Dzc)
 
 <hr>
 
